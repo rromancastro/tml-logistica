@@ -1,0 +1,26 @@
+section {
+    display: flex;
+    flex-direction: column;
+
+    div {
+        background-image: url('/assets/images/servicios/headerBg.avif');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        margin-top: 10vh;
+        height: 60vh;
+        padding-left: 20%;
+        h1 {
+            color: #fff;
+            font-size: 64px;
+        }
+    }
+    p {
+        font-size: 20px;
+        font-weight: 300;
+        padding: 40px 15%;
+        text-align: center;
+        line-height: 1.5;
+    }
+}

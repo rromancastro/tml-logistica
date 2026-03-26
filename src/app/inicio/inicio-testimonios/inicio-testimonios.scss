@@ -1,0 +1,162 @@
+section {
+    background-color: #003A70;
+    padding: 88px 24px;
+    padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    overflow: hidden;
+}
+
+#headerContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+
+    p,
+    h3 {
+        margin: 0;
+        color: #fff;
+        font-family: 'Poppins';
+    }
+
+    p {
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 500;
+        line-height: 1.2;
+        max-width: 760px;
+    }
+}
+
+#carouselContainer {
+    width: min(100%, 1100px);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+}
+
+#slidesViewport {
+    position: relative;
+    height: 200px;
+}
+
+.slide {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    filter: brightness(1.35) blur(2px);
+    transform: scale(0.98);
+    pointer-events: none;
+    transition:
+        opacity 450ms ease,
+        filter 450ms ease,
+        transform 450ms ease;
+}
+
+.line {
+    width: 40px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.slide.active {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.quote,
+.author,
+.role {
+    margin: 0;
+    color: #fff;
+    font-family: 'Poppins';
+}
+
+.quote {
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    width: 65%;
+    line-height: 1.45;
+}
+
+.authorBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.author {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.role {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.navButton {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    transition:
+        background-color 200ms ease,
+        transform 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.navButton:hover {
+    color: #8AA5BD;
+}
+
+#dotsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    background: #fff;
+    cursor: pointer;
+    transition:
+        transform 200ms ease,
+        background-color 200ms ease,
+        opacity 200ms ease;
+}
+
+.dot.active {
+    background: transparent;
+    transform: scale(1.15);
+    width: 8px;
+    height: 8px;
+}

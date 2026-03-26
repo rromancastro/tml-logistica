@@ -1,0 +1,34 @@
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 80vh;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20vh;
+        gap: 40px;
+
+        h3 {
+            font-size: 40px;
+            color: #fff;
+            font-family: "Avenir";
+        }
+
+        p {
+            color: #fff;
+            line-height: 1.5;
+            font-weight: 300;
+            text-align: center;
+            width: 70%;
+        }
+
+        &:nth-child(1) {
+            background-color: #034E81;
+        }
+        &:nth-child(2) {
+            background-color: #005BB2;
+        }
+    }
+}

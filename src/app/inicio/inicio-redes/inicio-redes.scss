@@ -1,0 +1,41 @@
+section {
+    display: flex;
+    height: 45vh;
+    div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+
+        &:not(:last-child) {
+            border-right: 1px solid #E3E3E4;
+        }
+
+        &:last-child {
+            div {
+                flex-direction: row;
+                gap: 8px;
+            }
+        }
+
+        svg {
+            height: 24px;
+        }
+        path {
+            fill: #003A70;
+        }
+        h3 {
+            color: #003A70;
+            font-weight: 400;
+            font-size: 20px;
+        }
+        p {
+            font-weight: 300;
+            text-align: center;
+            width: 80%;
+            line-height: 1.4;
+        }
+    }
+}

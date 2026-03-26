@@ -1,0 +1,41 @@
+<section>
+    <div id="carouselContainer">
+        <button
+            type="button"
+            class="navButton navButtonLeft"
+            aria-label="Testimonio anterior"
+            (click)="previousSlide()">
+            &#10094;
+        </button>
+
+        <div id="slidesViewport">
+            @for (slide of slides; track slide.author; let index = $index) {
+                <article class="slide" [class.active]="index === currentIndex">
+                    <p class="author">{{ slide.author }}</p>
+                    <div class="line"></div>
+                    <p class="quote">{{ slide.quote }}</p>
+                </article>
+            }
+        </div>
+
+        <button
+            type="button"
+            class="navButton navButtonRight"
+            aria-label="Siguiente testimonio"
+            (click)="nextSlide()">
+            &#10095;
+        </button>
+    </div>
+
+    <div id="dotsContainer">
+        @for (slide of slides; track slide.author; let index = $index) {
+            <button
+                type="button"
+                class="dot"
+                [class.active]="index === currentIndex"
+                [attr.aria-label]="'Ir al testimonio ' + (index + 1)"
+                (click)="goToSlide(index)">
+            </button>
+        }
+    </div>
+</section>

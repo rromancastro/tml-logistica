@@ -1,0 +1,26 @@
+footer {
+    background-color: #003A70;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 48px;
+    svg {
+        height: 24px;
+        path {
+            fill: #fff;
+        }
+    }
+    p {
+        color: #FFFFFF;
+        font-weight: 300;
+        text-align: center;
+        line-height: 1.4;
+        letter-spacing: 1px;
+    }
+    div {
+        display: flex;
+        gap: 12px;
+    }
+}

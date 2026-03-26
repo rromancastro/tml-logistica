@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'aos/dist/aos.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Avenir";
+    src: url('/fonts/Avenir.otf') format('opentype');
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Helvetica";
+    src: url('/fonts/Helvetica.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url('/fonts/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url('/fonts/Poppins-Medium.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea, select, option, img {
+    color: #808080;
+    text-decoration: none;
+    line-height: 1;
+    font-family: 'Poppins';
+}
+
+h1 {
+    font-family: 'Avenir';
+}
