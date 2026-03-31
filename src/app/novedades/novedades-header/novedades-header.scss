@@ -1,0 +1,25 @@
+section {
+    display: flex;
+    align-items: center;
+    background-image: url('/assets/images/novedades/header.avif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    margin-top: 10vh;
+    height: 60vh;
+    padding-left: 20%;
+
+    h1 {
+        color: #fff;
+        font-size: 64px;
+        text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding-left: 0;
+        justify-content: center;
+    }
+}

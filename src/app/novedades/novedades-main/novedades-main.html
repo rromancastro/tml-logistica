@@ -1,0 +1,20 @@
+<section class="novedades-main">
+    @if (loading) {
+    <p class="status">Cargando novedades...</p>
+    } @else if (error) {
+    <p class="status">No se pudieron cargar las novedades.</p>
+    } @else {
+    <div class="noticias-container">
+        @for (noticia of noticias; track noticia.titulo) {
+        <article class="noticia-card">
+            <p class="noticia-fecha">{{ noticia.fecha }}</p>
+            <h2 class="noticia-titulo">{{ noticia.titulo }}</h2>
+            <p class="noticia-actualizado">Actualizado: {{ noticia.actualizado }}</p>
+            <img class="noticia-image" [src]="noticia.imagen" [alt]="noticia.titulo" />
+            <div class="noticia-descripcion" [innerHTML]="noticia.descripcion"></div>
+            <p class="noticia-link">Leer nota completa: <a [href]="noticia.link" target="_blank">{{noticia.link}}</a></p>
+        </article>
+        }
+    </div>
+    }
+</section>

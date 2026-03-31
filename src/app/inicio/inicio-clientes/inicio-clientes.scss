@@ -18,3 +18,13 @@ section {
         }
     }
 }
+
+@media (max-width: 1024px) {
+    section {
+        div {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 80px;
+        }
+    }
+}

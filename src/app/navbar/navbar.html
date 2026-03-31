@@ -3,7 +3,10 @@
         <img src="/assets/images/logo.avif" alt="logo">
     </a>
 
-    <div>
+    <div [class.menu-abierto]="menuAbierto">
+        <button type="button" style="color: #fff;" (click)="toggleMenu()">
+            <svg fill="#ffffff" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd"></path> </g></svg>
+        </button>
         <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
         <a routerLinkActive="active" routerLink="/servicios">Servicios</a>
         <a routerLinkActive="active" routerLink="/nosotros">Nosotros</a>
@@ -11,5 +14,9 @@
         <a routerLinkActive="active" routerLink="/novedades">Novedades</a>
         <a target="_blank" href="https://conexion.tmlogistica.com.ar/SGLTYT_TML_PROD/web/login_clientes.asp">Acceso Clientes</a>
     </div>
-        <a href="/">Contacto</a>
+    <a routerLink="/" fragment="contacto">Contacto</a>
+
+    <button style="color: #000;" type="button" (click)="toggleMenu()">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Menu_Duo_LG"> <path id="Vector" d="M3 15H21M3 9H21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+    </button>
 </nav>

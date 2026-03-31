@@ -160,3 +160,68 @@ section {
     width: 8px;
     height: 8px;
 }
+
+@media (max-width: 768px) {
+    section {
+        background-color: #003A70;
+        padding: 80px 0px;
+    }
+
+    #carouselContainer {
+        width: min(100%, 1100px);
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 16px;
+    }
+
+    #slidesViewport {
+        position: relative;
+        height: 250px;
+    }
+
+    .slide {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;
+        opacity: 0;
+        filter: brightness(1.35) blur(2px);
+        transform: scale(0.98);
+        pointer-events: none;
+        transition:
+            opacity 450ms ease,
+            filter 450ms ease,
+            transform 450ms ease;
+    }
+
+    .line {
+        width: 40px;
+        height: 1px;
+        background-color: #fff;
+    }
+
+    .slide.active {
+        opacity: 1;
+        filter: brightness(1);
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    .quote,
+    .author,
+    .role {
+        margin: 0;
+        color: #fff;
+        font-size: 14px;
+        font-family: 'Poppins';
+    }
+
+    .quote {
+        font-size: 16px;
+        width: 100%;
+    }
+
+}

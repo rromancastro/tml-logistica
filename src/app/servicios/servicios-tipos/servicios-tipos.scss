@@ -87,3 +87,22 @@ a {
     width: fit-content;
     font-size: 14px;
 }
+
+@media (max-width: 768px) {
+    article {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            align-self: center;
+        }
+
+    &:nth-child(2), &:nth-child(4) {
+        background-color: #fff;
+        flex-direction: column;
+    }
+    }
+    .articuloInfo {
+        width: 90%;
+    }
+}

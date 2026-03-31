@@ -39,3 +39,14 @@ section {
         }
     }
 }
+
+@media (max-width: 1024px) {
+    section {
+        height: 100%;
+        flex-direction: column;
+    }
+    section>div {
+        padding: 40px 0;
+        border-top: 1px solid #E3E3E4;
+    }
+}

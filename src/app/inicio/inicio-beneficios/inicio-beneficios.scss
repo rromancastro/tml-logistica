@@ -83,6 +83,7 @@ section {
     padding-top: 40px;
     border-radius: 24px;
     margin-right: 15%;
+    height: fit-content;
 }
 
 #textoContainer {
@@ -115,6 +116,30 @@ section {
                 font-weight: 300;
                 line-height: 1.7;
             }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #celularContainer {
+        margin-right: 0;
+    }
+
+    #beneficiosContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    #textoContainer {
+        align-items: center;
+        text-align: center;
+        h4 {
+            width: 90%;
+        }
+        .articuloContainer {
+            width: 100%;
         }
     }
 }

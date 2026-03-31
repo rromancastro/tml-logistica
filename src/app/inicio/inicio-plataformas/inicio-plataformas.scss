@@ -21,3 +21,17 @@ section {
         }
     }
 }
+
+@media (max-width: 768px) {
+    section {
+        padding: 80px;
+        h3 {
+            text-align: center;
+        }
+        div {
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
