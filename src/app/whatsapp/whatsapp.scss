@@ -1,0 +1,15 @@
+#whatsapp {
+    background-color: #10C379;
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 6px;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-8px);
+    }
+}
