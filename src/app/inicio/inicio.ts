@@ -13,7 +13,7 @@ import { Whatsapp } from '../whatsapp/whatsapp';
 
 @Component({
   selector: 'app-inicio',
-  imports: [Navbar, InicioHeader, InicioServicios, InicioBeneficios, InicioPlataformas, InicioClientes, InicioTestimonios, InicioFormulario, InicioRedes, Footer, Whatsapp],
+  imports: [Navbar, InicioHeader, InicioServicios, InicioBeneficios, InicioPlataformas, InicioClientes, InicioTestimonios, InicioFormulario, InicioRedes, Footer],
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss',
 })

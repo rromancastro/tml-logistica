@@ -1,4 +1,4 @@
-<div id="whatsapp">
+<div id="whatsapp" (click)="handleMostrarDrop()">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -8,4 +8,17 @@
                 fill="#ffffff"></path>
         </g>
     </svg>
+
+    @if (mostrarDrop) {
+        <div id="whatsappDrop">
+            <div>
+                <img src="/assets/images/whatsappTmlLogo.jpeg" alt="TML logo">
+                <p>TML Logística</p>
+                <p>Asesoramiento para Clientes</p>
+            </div>
+            <div>
+                <a href="https://web.whatsapp.com/send?phone=5491139098253&text=Hola!" target="_blank">Escribinos</a>
+            </div>
+        </div>
+    }
 </div>

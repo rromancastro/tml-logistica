@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { RouterLinkActive, RouterLinkWithHref } from "@angular/router";
 
 @Component({
   selector: 'app-novedades-main',
-  imports: [],
+  imports: [RouterLinkActive, RouterLinkWithHref],
   templateUrl: './novedades-main.html',
   styleUrl: './novedades-main.scss',
 })
@@ -29,6 +30,7 @@ export class NovedadesMain {
 }
 
 interface Noticia {
+  id_novedad: string;
   titulo: string;
   fecha: string;
   actualizado: string;

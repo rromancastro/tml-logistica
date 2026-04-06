@@ -33,7 +33,14 @@
   color: #000;
   font-size: 40px;
   font-weight: 400;
+  font-family: "Avenir";
   line-height: 1.4;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    color: #003A70;
+  }
 }
 
 .noticia-actualizado {
@@ -60,7 +67,6 @@
   font-weight: 400;
 }
 
-
 .noticia-link {
   color: #000;
   font-size: 16px;
@@ -73,11 +79,30 @@
   }
 }
 
+.redes-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border-top: 1px solid #b9b9b9;
+  padding-top: 16px;
+
+  a {
+
+    &:hover {
+      path {
+        fill: #00466e;
+      }
+    }
+  }
+}
+
+
 @media (max-width: 768px) {
   .noticia-card {
     width: 90%;
     padding: 3% 5%;
   }
+
   .noticia-titulo {
     font-size: 28px;
   }

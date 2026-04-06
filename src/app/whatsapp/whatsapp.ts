@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-whatsapp',
@@ -6,4 +6,21 @@ import { Component } from '@angular/core';
   templateUrl: './whatsapp.html',
   styleUrl: './whatsapp.scss',
 })
-export class Whatsapp {}
+export class Whatsapp {
+  mostrarDrop: boolean = false;
+
+  constructor(private elementRef: ElementRef) {}
+
+  handleMostrarDrop(): void {
+    this.mostrarDrop = !this.mostrarDrop;
+  }
+  
+  @HostListener('document:click', ['$event'])
+  clickFuera(event: MouseEvent): void {
+    const clicDentro = this.elementRef.nativeElement.contains(event.target);
+
+    if (!clicDentro) {
+      this.mostrarDrop = false;
+    }
+  }
+}
