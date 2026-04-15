@@ -18,7 +18,7 @@ section {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 260px 260px;
         gap: 8px;
-        width: 80%;
+        width: 1000px;
 
         article {
             display: flex;
@@ -58,6 +58,11 @@ section {
 @media (max-width: 768px) {
     section {
         padding-bottom: 0;
+        padding-top: 40px;
+        gap: 40px;
+        h2 {
+            font-size: 32px;
+        }
         div {
             width: 100%;
             display: flex;

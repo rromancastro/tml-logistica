@@ -4,22 +4,28 @@ section {
     background-image: url('/assets/images/novedades/header.avif');
     background-size: cover;
     background-position: center;
+    justify-content: center;
     display: flex;
     align-items: center;
-    margin-top: 10vh;
+    margin-top: 76px;
     height: 60vh;
-    padding-left: 20%;
+    max-height: 321px;
 
     h1 {
         color: #fff;
         font-size: 64px;
         text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+        width: 850px;
     }
 }
 
 @media (max-width: 768px) {
     section {
-        padding-left: 0;
-        justify-content: center;
+            max-height: 260px;
+            h1 {
+                font-size: 50px;
+                width: 100%;
+                margin-left: 10%;
+            }
     }
 }

@@ -4,7 +4,6 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
     background-color: #fff;
     position: fixed;
     top: 0;
@@ -20,6 +19,7 @@ nav {
         display: flex;
         align-items: center;
         gap: 32px;
+        margin-left: 80px;
 
         a {
             font-family: 'Poppins';
@@ -50,6 +50,7 @@ nav>a {
             background-color: #8B8CD6;
         }
     }
+    margin-left: 32px;
 }
 
 .active {
@@ -82,6 +83,7 @@ button {
             width: 100%;
             opacity: 0;
             top: -50px;
+            right: 0;
             padding: 64px;
             z-index: -10;
             height: 100vh;
@@ -96,6 +98,7 @@ button {
         }
     }
     nav>a {
+        margin-right: 24px;
         &:not(:first-child) {
             display: none;
         }

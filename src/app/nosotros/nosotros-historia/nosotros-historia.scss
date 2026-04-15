@@ -1,24 +1,182 @@
-section {
-    padding: 80px 15%;
+#containerGeneral {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 32px;
+    align-items: center;
+    padding: 80px 0;
+}
 
-    h3 {
-        color: #404040;
-        font-size: 40px;
-        font-family: "Avenir";
+#lineaTemporalContainer {
+    display: grid;
+    grid-template-columns: 450px 450px;
+    grid-template-rows: auto;
+    width: 100%;
+    justify-content: center;
+}
+
+.cardsContainer1 {
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid #005BB2;
+    padding-top: 32px;
+    padding-bottom: 64px;
+
+    .cuadrado {
+        background-color: #005BB2;
+        width: 340px;
+        height: 250px;
+        align-self: center;
+        margin-top: 80px;
     }
 
-    p {
-        color: #404040;
-        text-align: center;
-        line-height: 1.5;
-        font-weight: 300;
-        &:nth-child(2), &:last-child {
-            font-weight: 400;
+    article {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding-top: 40px;
+        padding-right: 40px;
+        position: relative;
+
+        span {
+            font-weight: 600;
+            text-align: end;
         }
+
+        p {
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        img {
+            position: absolute;
+            background-color: #005BB2;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            top: -24px;
+            right: 350px;
+        }
+
+        .line {
+            width: 350px;
+            height: 1px;
+            border: 1px solid #005BB2;
+            border-style: dashed;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .point {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #005BB2;
+            position: absolute;
+            top: -7px;
+            right: -9px;
+        }
+
+        &:nth-child(1) {
+            padding-bottom: 80px;
+        }
+    }
+}
+
+.cardsContainer2 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+
+    .cuadrado {
+        background-color: #005BB2;
+        width: 340px;
+        height: 250px;
+        align-self: center;
+        margin-top: 32px;
+        margin-bottom: 64px;
+    }
+
+    article {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding-top: 40px;
+        padding-left: 40px;
+        position: relative;
+
+        span {
+            font-weight: 600;
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        img {
+            position: absolute;
+            background-color: #005BB2;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            top: -24px;
+            left: 350px;
+        }
+
+        .line {
+            width: 350px;
+            height: 1px;
+            border: 1px solid #005BB2;
+            border-style: dashed;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .point {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #005BB2;
+            position: absolute;
+            top: -7px;
+            left: -9px;
+        }
+
+        &:nth-child(2) {
+            padding-bottom: 80px;
+        }
+    }
+}
+
+#consecuenciaText {
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 900px;
+    text-align: center;
+    color: #fff;
+    background-color: #005BB2;
+    padding: 40px;
+    font-size: 20px;
+}
+
+#hoyText {
+    width: 1000px;
+    position: relative;
+    padding: 40px 0;
+    p {
+        width: 50%;
+        font-weight: 400;
+        line-height: 1.4;
+        font-size: 20px;
+    }
+    span {
+        position: absolute;
+        color: #005cb23b;
+        font-size: 264px;
+        top: 10px;
+        right: 0;
     }
 }

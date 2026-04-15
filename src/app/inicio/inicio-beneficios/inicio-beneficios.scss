@@ -73,6 +73,7 @@ section {
 #beneficiosContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
     padding: 80px;
 }
 
@@ -90,6 +91,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    width: 550px;
 
     h4 {
         font-size: 24px;
@@ -121,6 +123,13 @@ section {
 }
 
 @media (max-width: 768px) {
+
+    #TitulosContainer {
+        h3 {
+            font-size: 12px;
+        }
+    }
+
     #celularContainer {
         margin-right: 0;
     }
@@ -135,6 +144,7 @@ section {
     #textoContainer {
         align-items: center;
         text-align: center;
+        width: 100%;
         h4 {
             width: 90%;
         }

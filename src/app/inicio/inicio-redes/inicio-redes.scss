@@ -1,6 +1,7 @@
 section {
     display: flex;
     height: 45vh;
+    max-height: 309px;
     div {
         width: 100%;
         display: flex;
@@ -36,6 +37,7 @@ section {
             text-align: center;
             width: 80%;
             line-height: 1.4;
+            color: #000;
         }
     }
 }
@@ -43,6 +45,7 @@ section {
 @media (max-width: 1024px) {
     section {
         height: 100%;
+        max-height: fit-content;
         flex-direction: column;
     }
     section>div {

@@ -23,7 +23,7 @@ article {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 40%;
+    width: 500px;
     h3 {
         font-size: 20px;
         font-weight: 400;
@@ -70,5 +70,14 @@ article {
     }
     .articuloInfo {
         width: 80%;
+        h3 {
+            font-size: 24px;
+        }
+    }
+    .articuloPoint {
+        p {
+            font-size: 20px;    
+
+        }
     }
 }

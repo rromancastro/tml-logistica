@@ -2,11 +2,13 @@
 section {
     width: 100%;
     height: 100%;
+    margin-top: 76px;
     video {
         position: absolute;
         width: 100%;
         z-index: -1;
         height: 100vh;
+    max-height: 600px;
         object-fit: cover;
     }
     p {
@@ -25,34 +27,54 @@ section {
 section>div {
     width: 100%;
     height: 100vh;
+    max-height: 600px;
     background-color: #ffffff1a;
     display: flex;
     align-items: center;
+    gap: 24px;
     justify-content: center;
     h1 {
         font-size: 69px;
+        line-height: 1.2;
         color: #fff;
-        margin-top: 76px;
         text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
     }
     div {
         display: flex;
         align-items: center;
         align-self: flex-end;
-        gap: 24px;
+        gap: 32px;
+        margin-bottom: 24px;
     }
 }
 
 @media (max-width: 1024px) {
+    section {
+        video {
+            max-height: 100vh;
+            height: 100vh;
+        }
+    }
     section>div {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 40px;
+            max-height: 100vh;
+            height: 100vh;
+        gap: 120px;
+        h1 {
+            font-size: 56px;
+            text-align: center;
+        }
         div {
             align-self: center;
-            flex-wrap: wrap;
             justify-content: center;
+            display: grid;
+            padding: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            img {
+                width: 100%;
+            }
         }
     }
 }

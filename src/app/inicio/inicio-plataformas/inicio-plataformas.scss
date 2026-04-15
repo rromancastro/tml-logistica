@@ -12,6 +12,7 @@ section {
         color: #fff;
         font-weight: 300;
         font-size: 32px;
+        line-height: 1.5;
     }
     div {
         display: flex;
@@ -32,6 +33,9 @@ section {
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
+            img {
+                width: 127px;
+            }
         }
     }
 }

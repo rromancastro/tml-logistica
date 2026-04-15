@@ -12,7 +12,7 @@ article {
     grid-template-columns: 50% 45%;
     justify-content: space-between;
     background-color: #EEEEEE;
-    width: 65%;
+    width: 850px;
     div {
         display: flex;
         flex-direction: column;
@@ -55,6 +55,16 @@ article {
             div {
                 &:first-child {
                     align-items: start;
+                }
+                h3 {
+                    font-size: 24px;
+                }
+                p {
+                    font-size: 20px;
+                }
+                a {
+                    font-size: 20px;
+                    padding: 16px 32px;
                 }
             }
         }

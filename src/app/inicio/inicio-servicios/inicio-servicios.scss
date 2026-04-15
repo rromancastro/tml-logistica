@@ -14,12 +14,16 @@ section {
 }
 
 section>div {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 32px;
     article {
         width: 312px;
         background-color: #02305B;
+        img {
+            cursor: pointer;
+        }
         div {
             padding: 24px;
             display: flex;

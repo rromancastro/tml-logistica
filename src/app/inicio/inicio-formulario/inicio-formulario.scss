@@ -1,12 +1,13 @@
 section {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 80px;
     gap: 80px;
     background-color: #E1E1E1;
 }
 
-#contactoMobile {
+.contactoMobile {
     display: none;
 }
 
@@ -14,6 +15,8 @@ section>div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
+    width: 100%;
+    max-width: 1200px;
 }
 
 #contactoContainer {
@@ -75,7 +78,7 @@ form {
         label {
             font-size: 12px;
             font-weight: 300;
-            color: #333333;
+            color: #000;
         }
         input {
             background-color: #F6F6F6;
@@ -110,10 +113,10 @@ iframe {
 }
 
 @media (max-width: 768px) {
-    #contactoDesktop {
+    .contactoDesktop {
         display: none;
     }
-    #contactoMobile {
+    .contactoMobile {
         display: flex;
         gap: 20px;
         padding: 80px 0px;
@@ -129,12 +132,19 @@ iframe {
         width: 100%;
         div {
             width: 100%;
+            label {
+                font-size: 20px;
+            }
             input {
                 width: 100%;
+                font-size: 20px;
                 &:nth-child(1), &:nth-child(2) {
                     width: 100%;
                 }
             }
         }
+    }
+    iframe {
+        width: 90%;
     }
 }

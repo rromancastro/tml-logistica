@@ -18,6 +18,12 @@ article {
     img {
         height: 100%;
         align-self: flex-start;
+            &:not(:first-child) {
+                display: none;
+            }
+            &:last-child {
+                display: flex;
+            }
     }
 
     &:nth-child(2), &:nth-child(4) {
@@ -30,7 +36,7 @@ article {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 40%;
+    width: 500px;
 }
 
 .articuloHead {
@@ -44,13 +50,17 @@ article {
         flex-direction: column;
         font-family: "Avenir";
         span {
-            color: #0D3B6F;
-            font-size: 20px;
-            font-weight: 400;
+            display: inline;
         }
     }
 }
 
+span {
+    color: #0D3B6F;
+    font-size: 20px;
+    font-weight: 400;
+    display: none;
+}
 h4 {
     color: #404040;
     font-weight: 400;
@@ -74,7 +84,7 @@ h4 {
     p {
         color: #404040;
         font-weight: 300;
-        line-height: 1.4;
+        line-height: 1.2;
     }
 }
 
@@ -95,6 +105,16 @@ a {
         align-items: center;
         img {
             align-self: center;
+            &:not(:first-child) {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+            }
+            &:last-child {
+                display: none;
+            }
         }
 
     &:nth-child(2), &:nth-child(4) {
@@ -104,5 +124,28 @@ a {
     }
     .articuloInfo {
         width: 90%;
+    }
+    .articuloHead {
+        h3 {
+            span {
+                display: none;
+            }
+        }
+    }
+    span {
+        display: inline;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .articuloPoint {
+        p {
+            font-size: 20px;
+        }
+    }
+    a {
+        align-self: center;
+            font-size: 20px;
+            padding: 16px 32px;
     }
 }
