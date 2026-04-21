@@ -5,6 +5,13 @@
     justify-content: center;
     align-items: center;
     padding: 80px 0;
+
+    h2 {
+        color: #404040;
+        font-size: 40px;
+        font-family: "Avenir";
+        margin-bottom: 48px;
+    }
 }
 
 #lineaTemporalContainer {
@@ -18,16 +25,25 @@
 .cardsContainer1 {
     display: flex;
     flex-direction: column;
-    border-right: 3px solid #005BB2;
+    border-right: 3px solid #3d4f9e;
     padding-top: 32px;
     padding-bottom: 64px;
+    position: relative;
 
-    .cuadrado {
-        background-color: #005BB2;
-        width: 340px;
-        height: 250px;
-        align-self: center;
-        margin-top: 80px;
+    #cardsContainer1guion {
+        position: absolute;
+        top: -21px;
+        right: -13px;
+        font-size: 40px;
+        color: #3d4f9e;
+    }
+    #cardsContainer1pico {
+        position: absolute;
+        bottom: -18px;
+        right: -12px;
+        font-size: 40px;
+        color: #3d4f9e;
+        rotate: 90deg;
     }
 
     article {
@@ -40,7 +56,6 @@
 
         span {
             font-weight: 600;
-            text-align: end;
         }
 
         p {
@@ -50,18 +65,25 @@
 
         img {
             position: absolute;
-            background-color: #005BB2;
+            background-color: #3d4f9e;
             border-radius: 50%;
             width: 48px;
             height: 48px;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+            object-fit: contain;
+            display: block;
+            overflow: hidden;
+            clip-path: circle(50%);
             top: -24px;
-            right: 350px;
+            right: 400px;
+            padding: 8px;
         }
 
         .line {
-            width: 350px;
+            width: 420px;
             height: 1px;
-            border: 1px solid #005BB2;
+            border: 1px solid #3d4f9e;
             border-style: dashed;
             position: absolute;
             right: 0;
@@ -69,16 +91,16 @@
         }
 
         .point {
-            width: 16px;
-            height: 16px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background-color: #005BB2;
+            background-color: #3d4f9e;
             position: absolute;
-            top: -7px;
-            right: -9px;
+            top: -4px;
+            right: -7px;
         }
 
-        &:nth-child(1) {
+        &:nth-child(3) {
             padding-bottom: 80px;
         }
     }
@@ -87,16 +109,7 @@
 .cardsContainer2 {
     display: flex;
     flex-direction: column;
-    padding-top: 24px;
-
-    .cuadrado {
-        background-color: #005BB2;
-        width: 340px;
-        height: 250px;
-        align-self: center;
-        margin-top: 32px;
-        margin-bottom: 64px;
-    }
+    padding-top: 162px;
 
     article {
         display: flex;
@@ -104,6 +117,7 @@
         gap: 32px;
         padding-top: 40px;
         padding-left: 40px;
+        padding-bottom: 40px;
         position: relative;
 
         span {
@@ -117,18 +131,25 @@
 
         img {
             position: absolute;
-            background-color: #005BB2;
+            background-color: #3d4f9e;
             border-radius: 50%;
             width: 48px;
             height: 48px;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+            display: block;
+            overflow: hidden;
+            clip-path: circle(50%);
             top: -24px;
-            left: 350px;
+            left: 400px;
+            padding: 8px;
+            object-fit: contain;
         }
 
         .line {
-            width: 350px;
+            width: 420px;
             height: 1px;
-            border: 1px solid #005BB2;
+            border: 1px solid #3d4f9e;
             border-style: dashed;
             position: absolute;
             left: 0;
@@ -136,17 +157,17 @@
         }
 
         .point {
-            width: 16px;
-            height: 16px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background-color: #005BB2;
+            background-color: #3d4f9e;
             position: absolute;
-            top: -7px;
-            left: -9px;
+            top: -4px;
+            left: -6px;
         }
 
-        &:nth-child(2) {
-            padding-bottom: 80px;
+        &:nth-child(1) {
+            padding-bottom: 124px;
         }
     }
 }
@@ -157,25 +178,29 @@
     max-width: 900px;
     text-align: center;
     color: #fff;
-    background-color: #005BB2;
-    padding: 40px;
+    background-color: #3d4f9e;
+    padding: 40px 80px;
     font-size: 20px;
+    margin-top: 48px;
+    text-shadow: 1px 1px 10px #000;
 }
 
 #hoyText {
     width: 1000px;
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
     padding: 40px 0;
     p {
-        width: 50%;
         font-weight: 400;
         line-height: 1.4;
         font-size: 20px;
     }
     span {
-        position: absolute;
         color: #005cb23b;
-        font-size: 264px;
+        font-size: 160px;
+        justify-self: center;
         top: 10px;
         right: 0;
     }

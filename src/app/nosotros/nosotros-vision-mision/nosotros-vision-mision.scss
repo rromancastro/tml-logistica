@@ -2,15 +2,24 @@ section {
     display: grid;
     grid-template-columns: 400px 400px;
     justify-content: center;
-    gap: 24px;
-    height: 417px;
+    gap: 80px;
+    height: 100%;
+    padding: 80px;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        url('/assets/images/nosotros/nosotrosMujer.jpg');
+    background-position: center -200px;
+    background-size: cover;
 
     div {
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-bottom: 30px;
         padding-top: 60px;
+        height: 100%;
         gap: 40px;
+        background-color: #3d4f9e;
 
         h3 {
             font-size: 40px;
@@ -23,13 +32,6 @@ section {
             line-height: 1.2;
             font-weight: 300;
             width: 300px;
-        }
-
-        &:nth-child(1) {
-            background-color: #034E81;
-        }
-        &:nth-child(2) {
-            background-color: #005BB2;
         }
     }
 }

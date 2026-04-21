@@ -14,42 +14,42 @@ section {
     }
 
     div {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 260px 260px;
-        gap: 8px;
-        width: 1000px;
+        display: flex;
+        justify-content: space-around;
+        align-items: start;
+        width: 100%;
 
         article {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 16px;
-            padding: 0 20%;
+            gap: 32px;
+            img {
+                background-color: #2e2d64;
+                border-radius: 50%;
+                width: 64px;
+                height: 64px;
+                aspect-ratio: 1 / 1;
+                padding: 10px;
+                box-sizing: border-box;
+                object-fit: contain;
+                display: block;
+                overflow: hidden;
+                clip-path: circle(50%);
+            }
             h4 {
                 font-family: "Avenir";
-                color: #fff;
+                color: #373332;
                 font-size: 32px;
                 text-align: center;
             }
             p {
-                color: #fff;
+                color: #373332;
                 text-align: center;
                 line-height: 1.5;
                 font-weight: 300;
-            }
-
-            &:nth-child(1), &:nth-child(6) {
-                background-color: #003A70;
-            }
-
-            &:nth-child(2), &:nth-child(4) {
-                background-color: #005BB2;
-            }
-
-            &:nth-child(3), &:nth-child(5) {
-                background-color: #0B720C;
+                width: 200px;
             }
         }
     }
