@@ -1,22 +1,24 @@
 [
     {
         "id_novedad": "1",
-        "titulo": "Tml se une a Pacto Global de la ONU",
+        "titulo": "Perfiles logísticos, Alejandro Falce Presidente de TML logística",
         "fecha": "20 ene",
         "actualizado": "16 feb",
-        "descripcion": "<div><b>“En el futuro de la logística en Argentina, veo una mayor automatización, una consolidación de operadores y una creciente demanda de soluciones personalizadas.”</b><p>Alejandro Falce es empresario, docente, licenciado en logística, hombre de rugby y amante de la montaña, padre de 2 hijos varones y casado con Julieta.Comenzó a trabajar en el rubro logístico en el año 2000 con su familia realizando operaciones para la cadena de supermercados EKI dentro de su centro de distribución.</p></div>",
+        "descripcion": "<div><b>“En el futuro de la logística en Argentina, veo una mayor automatización, una consolidación de operadores y una creciente demanda de soluciones personalizadas.”</b><p>Alejandro Falce es empresario, docente, licenciado en logística, hombre de rugby y amante de la montaña, padre de 2 hijos varones y casado con Julieta. Comenzó a trabajar en el rubro logístico en el año 2000 con su familia realizando operaciones para la cadena de supermercados EKI dentro de su centro de distribución.</p></div>",
         "imagen": "/assets/images/novedades/noticia2.avif",
         "imagenMini": "/assets/images/novedades/noticia2back.avif",
-        "link": "https://www.cedol.org.ar/logistica/perfiles-logisticos-alejandro-falce-presidente-de-tml/"
+        "link": "https://www.cedol.org.ar/logistica/perfiles-logisticos-alejandro-falce-presidente-de-tml/",
+        "url": "/novedades/1"
     },
     {
         "id_novedad": "2",
-        "titulo": "Perfiles logísticos, Alejandro Falce Presidente de TML logística",
+        "titulo": "Tml se une a Pacto Global de la ONU",
         "fecha": "20 ene",
         "actualizado": "13 feb",
-        "descripcion": "<div><p><b>TML Logística, formaliza su compromiso con la sostenibilidad al unirse al Pacto Global de las Naciones Unidas a partir de 2025. Esta adhesión subraya la visión de la empresa, líder en soluciones logísticas personalizadas y automatización, de integrar los Diez Principios universales en su operación.</p><p>Esta incorporación al Pacto Global consolida a TML como una compañía que liga la rentabilidad a la responsabilidad, posicionándola como un referente en la gestión sostenible dentro del sector. La empresa entiende que la logística del futuro es, indiscutiblemente, más justa y responsable.</p></div>",
+        "descripcion": "<div><p><b>TML Logística, formaliza su compromiso con la sostenibilidad al unirse al Pacto Global de las Naciones Unidas a partir de 2025. Esta adhesión subraya la visión de la empresa, líder en soluciones logísticas personalizadas y automatización, de integrar los diez principios universales en su operación.</b></p><p>Esta incorporación al Pacto Global consolida a TML como una compañía que liga la rentabilidad a la responsabilidad, posicionándola como un referente en la gestión sostenible dentro del sector. La empresa entiende que la logística del futuro es, indiscutiblemente, más justa y responsable.</p></div>",
         "imagen": "/assets/images/novedades/noticia1.webp",
         "imagenMini": "/assets/images/novedades/noticia1back.avif",
-        "link": "https://www.cedol.org.ar/logistica/perfiles-logisticos-alejandro-falce-presidente-de-tml/"
+        "link": "https://www.cedol.org.ar/logistica/perfiles-logisticos-alejandro-falce-presidente-de-tml/",
+        "url": "/novedades/2"
     }
 ]

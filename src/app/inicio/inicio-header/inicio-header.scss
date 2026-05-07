@@ -43,8 +43,11 @@ section>div {
         display: flex;
         align-items: center;
         align-self: flex-end;
-        gap: 32px;
+        gap: 48px;
         margin-bottom: 24px;
+        img {
+            height: 70px;
+        }
     }
 }
 
@@ -74,6 +77,8 @@ section>div {
             grid-template-columns: repeat(4, 1fr);
             img {
                 width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
         }
     }
