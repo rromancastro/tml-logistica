@@ -47,9 +47,16 @@ section {
     gap: 24px;
 }
 
+#rotado {
+    transform: rotate(180deg);
+}
+
 #slidesViewport {
     position: relative;
     height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .slide {
