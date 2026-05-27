@@ -2,35 +2,59 @@
     <div>
         <div id="contactoContainer">
             <div>
-                <h3 style="color: #003A70;">¿Querés ponerte en <br> contacto con nosotros?</h3>
-                <p>A través del formulario de consulta podremos conocer más sobre tu operación y potenciar tu negocio.</p>
+                <h3 style="color: #003A70;">Quieres ponerte en <br> contacto con nosotros?</h3>
+                <p>A traves del formulario de consulta podremos conocer mas sobre tu operacion y potenciar tu negocio.</p>
             </div>
             <div>
-                <h3 style="color: #0B720C;">¿Querés trabajar con nosotros?</h3>
+                <h3 style="color: #0B720C;">Quieres trabajar con nosotros?</h3>
                 <p>Contactanos por este medio</p>
-                <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScFysp3cT_8QJMYMs3DcwTrvHlAgWr06kGTbCw_0TpvHDapdA/viewform">Ingresá tu C.V.</a>
+                <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScFysp3cT_8QJMYMs3DcwTrvHlAgWr06kGTbCw_0TpvHDapdA/viewform">Ingresa tu C.V.</a>
             </div>
         </div>
-        <form>
+
+        
+
+        <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
             <div>
                 <label for="nombre">Nombre de la empresa *</label>
-                <input type="text" name="nombre" id="nombre" required>
+                <input type="text" name="nombre" id="nombre" formControlName="nombre" required>
             </div>
             <div>
-                <label for="telefono">Teléfono *</label>
-                <input type="number" name="telefono" id="telefono" required>
+                <label for="telefono">Telefono *</label>
+                <input type="tel" name="telefono" id="telefono" formControlName="telefono" required>
             </div>
             <div>
                 <label for="email">E-mail *</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" formControlName="email" required>
             </div>
             <div>
                 <label for="consulta">Consulta</label>
-                <input type="text" name="consulta" id="consulta">
+                <input type="text" name="consulta" id="consulta" formControlName="consulta">
             </div>
-            <input type="submit" value="Enviar">
+            <!-- Bloque anterior: submit simple sin estado visual de envio.
+            <input type="submit" value="Enviar" [disabled]="enviando() || contactoForm.invalid">
+            -->
+            <button type="submit" [disabled]="enviando() || contactoForm.invalid" [class.is-loading]="enviando()">
+                @if (enviando()) {
+                    <span>Enviando</span>
+                    <span class="loading-dots" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                } @else {
+                    <span class="text-white">Enviar</span>
+                }
+            </button>
         </form>
-        <p>El formulario fué recibido correctamente. Gracias por tu interés.</p>
+
+        @if (enviado()) {
+            <p>El formulario fue recibido correctamente. Gracias por tu interes.</p>
+        }
+
+        @if (error()) {
+            <p>{{ error() }}</p>
+        }
     </div>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6581.770270728426!2d-58.717702425083154!3d-34.429672683170494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bca18b3595460f%3A0x25a4255a3947ee61!2sTML%20Log%C3%ADstica!5e0!3m2!1ses-419!2sar!4v1774382906617!5m2!1ses-419!2sar" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
@@ -39,32 +63,78 @@
     <div>
         <div id="contactoContainer">
             <div>
-                <h3 style="color: #003A70;">¿Querés ponerte en <br> contacto con nosotros?</h3>
-                <p>A través del formulario de consulta podremos conocer más sobre tu operación y potenciar tu negocio.</p>
+                <h3 style="color: #003A70;">Quieres ponerte en <br> contacto con nosotros?</h3>
+                <p>A traves del formulario de consulta podremos conocer mas sobre tu operacion y potenciar tu negocio.</p>
             </div>
-        <form>
-            <div>
-                <label for="nombre">Nombre de la empresa *</label>
-                <input type="text" name="nombre" id="nombre" required>
-            </div>
-            <div>
-                <label for="telefono">Teléfono *</label>
-                <input type="number" name="telefono" id="telefono" required>
-            </div>
-            <div>
-                <label for="email">E-mail *</label>
-                <input type="email" name="email" id="email" required>
-            </div>
-            <div>
-                <label for="consulta">Consulta</label>
-                <input type="text" name="consulta" id="consulta">
-            </div>
-            <input type="submit" value="Enviar">
+
+            <!-- Bloque anterior del formulario mobile, reemplazado por Reactive Forms para conectarlo al servicio.
+            <form>
+                <div>
+                    <label for="nombre">Nombre de la empresa *</label>
+                    <input type="text" name="nombre" id="nombre" required>
+                </div>
+                <div>
+                    <label for="telefono">Telefono *</label>
+                    <input type="number" name="telefono" id="telefono" required>
+                </div>
+                <div>
+                    <label for="email">E-mail *</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div>
+                    <label for="consulta">Consulta</label>
+                    <input type="text" name="consulta" id="consulta">
+                </div>
+                <input type="submit" value="Enviar">
+            </form>
+            -->
+
+            <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
+                <div>
+                    <label for="nombre">Nombre de la empresa *</label>
+                    <input type="text" name="nombre" id="nombre" formControlName="nombre" required>
+                </div>
+                <div>
+                    <label for="telefono">Telefono *</label>
+                    <input type="tel" name="telefono" id="telefono" formControlName="telefono" required>
+                </div>
+                <div>
+                    <label for="email">E-mail *</label>
+                    <input type="email" name="email" id="email" formControlName="email" required>
+                </div>
+                <div>
+                    <label for="consulta">Consulta</label>
+                    <input type="text" name="consulta" id="consulta" formControlName="consulta">
+                </div>
+            <!-- Bloque anterior: submit simple sin estado visual de envio.
+            <input type="submit" value="Enviar" [disabled]="enviando() || contactoForm.invalid">
+            -->
+            <button type="submit" [disabled]="enviando() || contactoForm.invalid" [class.is-loading]="enviando()">
+                @if (enviando()) {
+                    <span>Enviando</span>
+                    <span class="loading-dots" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                } @else {
+                    <span>Enviar</span>
+                }
+            </button>
         </form>
+
+            @if (enviado()) {
+                <p>El formulario fue recibido correctamente. Gracias por tu interes.</p>
+            }
+
+            @if (error()) {
+                <p>{{ error() }}</p>
+            }
+
             <div>
-                <h3 style="color: #0B720C;">¿Querés trabajar con nosotros?</h3>
+                <h3 style="color: #0B720C;">Quieres trabajar con nosotros?</h3>
                 <p>Contactanos por este medio</p>
-                <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScFysp3cT_8QJMYMs3DcwTrvHlAgWr06kGTbCw_0TpvHDapdA/viewform">Ingresá tu C.V.</a>
+                <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScFysp3cT_8QJMYMs3DcwTrvHlAgWr06kGTbCw_0TpvHDapdA/viewform">Ingresa tu C.V.</a>
             </div>
         </div>
     </div>

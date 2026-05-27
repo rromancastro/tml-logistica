@@ -1,75 +1,47 @@
-import { HttpClient } from '@angular/common/http';
-import { DOCUMENT } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { RouterLinkActive, RouterLinkWithHref } from "@angular/router";
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { NoticiasService, Noticia, ShareLinks } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-novedades-main',
   imports: [RouterLinkActive, RouterLinkWithHref],
   templateUrl: './novedades-main.html',
   styleUrl: './novedades-main.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovedadesMain {
-  private readonly http = inject(HttpClient);
-  private readonly document = inject(DOCUMENT);
+  private readonly noticiasService = inject(NoticiasService);
 
-  noticias: Noticia[] = [];
-  loading = true;
-  error = false;
+  readonly noticias = signal<Noticia[]>([]);
+  readonly loading = signal(true);
+  readonly error = signal(false);
 
   constructor() {
-    this.http.get<Noticia[]>('/noticias.json').subscribe({
+    // Bloque anterior: la lista se leia desde /noticias.json o directo en el componente.
+    // this.http.get<Noticia[]>('/server/blog-list.php').subscribe({
+    //   next: (response) => {
+    //     this.noticias = response;
+    //     this.loading = false;
+    //   },
+    //   error: () => {
+    //     this.error = true;
+    //     this.loading = false;
+    //   },
+    // });
+
+    this.noticiasService.getNoticias().subscribe({
       next: (response) => {
-        this.noticias = response;
-        this.loading = false;
+        this.noticias.set(response);
+        this.loading.set(false);
       },
       error: () => {
-        this.error = true;
-        this.loading = false;
+        this.error.set(true);
+        this.loading.set(false);
       },
     });
   }
 
   getShareLinks(noticia: Noticia): ShareLinks {
-    const shareUrl = this.getAbsoluteUrl(noticia);
-    const encodedUrl = encodeURIComponent(shareUrl);
-    const encodedTitle = encodeURIComponent(noticia.titulo);
-
-    return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-      x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-      copy: shareUrl,
-    };
+    return this.noticiasService.getShareLinks(noticia);
   }
-
-  private getAbsoluteUrl(noticia: Noticia): string {
-    const origin = this.getSiteOrigin();
-    return new URL(noticia.url ?? `/novedades/${noticia.id_novedad}`, origin).toString();
-  }
-
-  private getSiteOrigin(): string {
-    const origin = this.document.location?.origin;
-    const isLocalhost = origin ? /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) : false;
-
-    return origin && !isLocalhost ? origin : 'https://a0090975.ferozo.com/';
-  }
-}
-
-interface Noticia {
-  id_novedad: string;
-  titulo: string;
-  fecha: string;
-  actualizado: string;
-  descripcion: string;
-  imagen: string;
-  link: string;
-  url?: string;
-}
-
-interface ShareLinks {
-  facebook: string;
-  x: string;
-  linkedin: string;
-  copy: string;
 }

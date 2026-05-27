@@ -87,6 +87,12 @@ section {
     height: fit-content;
 }
 
+
+#celularContainer img {
+    margin: 0 auto;
+    display: block;
+}
+
 #textoContainer {
     display: flex;
     flex-direction: column;

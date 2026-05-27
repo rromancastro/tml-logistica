@@ -1,14 +1,15 @@
 <app-navbar></app-navbar>
 
 <section class="noticias-container">
-  @if (loading) {
+  @if (loading()) {
   <p class="status">Cargando novedad...</p>
-  } @else if (error || !noticia) {
+  } @else if (error() || !noticia()) {
   <div class="status-container">
     <p class="status">No se encontró la novedad solicitada.</p>
     <a routerLink="/novedades" class="back-link">Volver a novedades</a>
   </div>
   } @else {
+  @if (noticia(); as noticia) {
   <a routerLink="/novedades" class="back-link">Ver todas las novedades</a>
   <article class="noticia-card">
     <p class="noticia-fecha">{{ noticia.fecha }}</p>
@@ -56,13 +57,14 @@
     </div>
   </article>
   }
+  }
 </section>
 <section class="entradas-recientes-container">
   <p class="entradas-recientes-container-nav">Entradas recientes <a routerLink="/novedades" class="back-link">Ver todas
       las novedades</a></p>
   <section class="entradas-cards-containers">
-    @for (otraNoticia of otrasNoticias; track otraNoticia.id_novedad) {
-    <article class="entrada-card" [routerLink]="['/novedades', otraNoticia.id_novedad]">
+    @for (otraNoticia of otrasNoticias(); track otraNoticia.id_novedad) {
+    <article class="entrada-card" [routerLink]="['/novedades', otraNoticia.id_novedad, otraNoticia.url]">
       <img class="entrada-card-image" [src]="otraNoticia.imagenMini" [alt]="otraNoticia.titulo" />
       <h3 class="entrada-card-title">{{ otraNoticia.titulo }}</h3>
     </article>

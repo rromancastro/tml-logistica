@@ -65,7 +65,8 @@ form {
     height: 100%;
     align-items:center;
     gap: 16px;
-    input[type="submit"] {
+    input[type="submit"],
+    button[type="submit"] {
         background-color: #0F4577;
         color: #fff;
         border: none;
@@ -75,6 +76,21 @@ form {
         height: fit-content;
         align-self: flex-end;
         margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background-color 160ms ease, opacity 160ms ease, transform 160ms ease;
+
+        &:disabled {
+            background-color: #9aa3ad;
+            color: #fff;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+    }
+
+    button[type="submit"].is-loading {
+        min-width: 132px;
     }
     div {
         display: flex;
@@ -110,6 +126,10 @@ form {
             }
         }
     }
+}
+
+.text-white {
+    color: #fff;
 }
 
 iframe {
@@ -151,5 +171,42 @@ iframe {
     }
     iframe {
         width: 90%;
+    }
+}
+
+.loading-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background-color: currentColor;
+        display: inline-block;
+        animation: loadingDot 900ms infinite ease-in-out;
+
+        &:nth-child(2) {
+            animation-delay: 120ms;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 240ms;
+        }
+    }
+}
+
+@keyframes loadingDot {
+    0%,
+    80%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.45;
+    }
+
+    40% {
+        transform: translateY(-3px);
+        opacity: 1;
     }
 }

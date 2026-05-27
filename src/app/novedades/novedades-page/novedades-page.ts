@@ -1,91 +1,105 @@
-import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import { Footer } from '../../footer/footer';
 import { Navbar } from '../../navbar/navbar';
+import { NoticiasService, Noticia, ShareLinks } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-novedades-page',
   imports: [Navbar, Footer, RouterLink],
   templateUrl: './novedades-page.html',
   styleUrl: './novedades-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovedadesPage {
-  private readonly http = inject(HttpClient);
   private readonly document = inject(DOCUMENT);
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
+  private readonly noticiasService = inject(NoticiasService);
   private readonly route = inject(ActivatedRoute);
 
-  noticia: Noticia | null = null;
-  otrasNoticias: Noticia[] = [];
-  loading = true;
-  error = false;
+  readonly noticia = signal<Noticia | null>(null);
+  readonly otrasNoticias = signal<Noticia[]>([]);
+  readonly loading = signal(true);
+  readonly error = signal(false);
 
   constructor() {
     this.route.paramMap.subscribe((params) => {
-      const idNovedad = params.get('id_novedad');
+      const idNovedad = params.get('id_novedad') ?? '';
+      const slug = params.get('slug') ?? '';
 
-      this.loading = true;
-      this.error = false;
-      this.noticia = null;
-      this.otrasNoticias = [];
+      this.loading.set(true);
+      this.error.set(false);
+      this.noticia.set(null);
+      this.otrasNoticias.set([]);
 
-      this.http.get<Noticia[]>('/noticias.json').subscribe({
+      
+
+      this.noticiasService.getDetalle(idNovedad).subscribe({
         next: (response) => {
-          this.noticia = response.find((item) => item.id_novedad === idNovedad) ?? null;
-          this.otrasNoticias = response.filter((item) => item.id_novedad !== idNovedad);
-          this.error = !this.noticia;
-          this.loading = false;
+          this.noticia.set(response.noticia);
+          this.otrasNoticias.set(response.otrasNoticias);
+          this.error.set(!response.noticia);
+          this.updateSeo(response.noticia, slug, idNovedad);
+          this.updateCanonicalLink(response.noticia?.url ?? slug, idNovedad);
+          this.loading.set(false);
         },
         error: () => {
-          this.error = true;
-          this.loading = false;
+          this.error.set(true);
+          this.updateSeo(null, slug, idNovedad);
+          this.updateCanonicalLink(slug, idNovedad);
+          this.loading.set(false);
         },
       });
     });
   }
 
   getShareLinks(noticia: Noticia): ShareLinks {
-    const shareUrl = this.getAbsoluteUrl(noticia);
-    const encodedUrl = encodeURIComponent(shareUrl);
-    const encodedTitle = encodeURIComponent(noticia.titulo);
-
-    return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-      x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-      copy: shareUrl,
-    };
+    return this.noticiasService.getShareLinks(noticia);
   }
 
-  private getAbsoluteUrl(noticia: Noticia): string {
-    const origin = this.getSiteOrigin();
-    return new URL(noticia.url ?? `/novedades/${noticia.id_novedad}`, origin).toString();
+  private updateCanonicalLink(slug: string, idNovedad: string): void {
+    const canonicalUrl = this.buildCanonicalUrl(idNovedad, slug);
+    const head = this.document.head;
+    let canonicalLink = head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+    if (!canonicalLink) {
+      canonicalLink = this.document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      head.appendChild(canonicalLink);
+    }
+
+    canonicalLink.setAttribute('href', canonicalUrl);
   }
 
-  private getSiteOrigin(): string {
-    const origin = this.document.location?.origin;
-    const isLocalhost = origin ? /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) : false;
+  private updateSeo(noticia: Noticia | null, slug: string, idNovedad: string): void {
+    const canonicalUrl = this.buildCanonicalUrl(idNovedad, noticia?.url ?? slug);
+    const title = noticia
+      ? `${noticia.titulo} | TML Logística`
+      : 'Novedades | TML Logística';
+    const description = noticia
+      ? this.buildDescription(noticia)
+      : 'Noticias y novedades de TML Logística.';
 
-    return origin && !isLocalhost ? origin : 'https://www.tmlogistica.com.ar';
+    this.title.setTitle(title);
+    this.meta.updateTag({ name: 'description', content: description });
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
   }
-}
 
-interface Noticia {
-  id_novedad: string;
-  titulo: string;
-  fecha: string;
-  actualizado: string;
-  descripcion: string;
-  imagen: string;
-  imagenMini: string;
-  link: string;
-  url?: string;
-}
+  private buildCanonicalUrl(idNovedad: string, slug: string): string {
+    const siteOrigin = 'https://tmlogistica.com.ar';
+    const path = slug ? `/novedades/${idNovedad}/${slug}` : `/novedades/${idNovedad}`;
 
-interface ShareLinks {
-  facebook: string;
-  x: string;
-  linkedin: string;
-  copy: string;
+    return new URL(path, siteOrigin).toString();
+  }
+
+  private buildDescription(noticia: Noticia): string {
+    const plainText = noticia.descripcion.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+    return plainText.length > 155 ? `${plainText.slice(0, 152)}...` : plainText;
+  }
 }

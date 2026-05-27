@@ -14,6 +14,7 @@ section {
 }
 
 section>div {
+    /* Layout anterior con flex-wrap.
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -49,11 +50,58 @@ section>div {
             }
         }
     }
+    */
+
+    /* Nuevo layout en grid: mantiene los paddings y colores, y adapta las cards al ancho disponible. */
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-content: center;
+    gap: 32px;
+
+    article {
+        width: 100%;
+        background-color: #02305B;
+
+        img {
+            width: 100%;
+            display: block;
+            cursor: pointer;
+        }
+
+        div {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            p {
+                color: #fff;
+                font-family: 'Poppins';
+
+                &:first-child {
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+
+                &:nth-child(2) {
+                    font-weight: 300;
+                    font-size: 16px;
+                    color: #fff;
+                }
+            }
+
+            a {
+                color: #005BB2;
+                font-family: 'Poppins';
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 @media (max-width: 1024px) {
     section>div {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -64,8 +112,6 @@ section>div {
         }
     }
     section>div {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        grid-template-columns: 1fr;
     }
 }

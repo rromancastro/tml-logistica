@@ -7,10 +7,11 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Navbar } from '../../navbar/navbar';
 
 @Component({
   selector: 'app-inicio-header',
-  imports: [],
+  imports: [Navbar],
   templateUrl: './inicio-header.html',
   styleUrl: './inicio-header.scss',
 })

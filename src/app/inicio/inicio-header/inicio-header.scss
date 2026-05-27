@@ -1,16 +1,57 @@
-
-section {
+.hero {
+    position: relative;
     width: 100%;
-    height: 100%;
-    margin-top: 76px;
+    height: 100vh;
+    overflow: hidden;
+
     video {
         position: absolute;
+        inset: 0;
         width: 100%;
+        height: 100%;
         z-index: -1;
-        height: 100vh;
-    max-height: 600px;
         object-fit: cover;
     }
+
+    > div {
+        width: 100%;
+        height: 100vh;
+        max-height: 600px;
+        background-color: #ffffff1a;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 69px;
+        line-height: 1.2;
+        color: #fff;
+        text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+    }
+
+    > div > div {
+        display: flex;
+        align-items: center;
+        align-self: flex-end;
+        gap: 48px;
+        margin-bottom: 24px;
+
+        img {
+            height: 70px;
+        }
+    }
+}
+
+.intro {
+    width: 100%;
+    background-color: #ffffff1a;
+
+    > div {
+        width: 100%;
+    }
+
     p {
         width: 100%;
         padding: 80px 40px;
@@ -21,60 +62,40 @@ section {
         line-height: 32px;
         letter-spacing: 1px;
     }
-
 }
 
-section>div {
-    width: 100%;
-    height: 100vh;
-    max-height: 600px;
-    background-color: #ffffff1a;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    justify-content: center;
-    h1 {
-        font-size: 69px;
-        line-height: 1.2;
-        color: #fff;
-        text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
-    }
-    div {
-        display: flex;
-        align-items: center;
-        align-self: flex-end;
-        gap: 48px;
-        margin-bottom: 24px;
-        img {
-            height: 70px;
-        }
-    }
+
+.vh-50{
+    height: 50vh;
 }
 
 @media (max-width: 1024px) {
-    section {
+    .hero {
         video {
-            max-height: 100vh;
             height: 100vh;
         }
-    }
-    section>div {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+
+        > div {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             max-height: 100vh;
             height: 100vh;
-        gap: 120px;
+            gap: 120px;
+        }
+
         h1 {
             font-size: 56px;
             text-align: center;
         }
-        div {
+
+        > div > div {
             align-self: center;
             justify-content: center;
             display: grid;
             padding: 20px;
             grid-template-columns: repeat(4, 1fr);
+
             img {
                 width: 100%;
                 height: 100%;
