@@ -240,8 +240,13 @@ class Sql
         $this->connection->close();
 
         return json_encode(['error' => $ok ? '0' : $stmt->error]);
-    } 
+    }
 
+    public function editBlog($tabla, $item, $dato, $where, $id) {
+        // Compatibilidad con endpoints viejos que esperan este nombre de mÈtodo.
+        // Reutilizamos el update preparado para no romper HTML ni valores con comillas.
+        return $this->edit_new($tabla, $item, $dato, $where, $id);
+    }
 
     public function edit($tabla, $item, $dato, $where, $id) {
     //echo "Punto A: Dentro del m√©todo edit.\n";

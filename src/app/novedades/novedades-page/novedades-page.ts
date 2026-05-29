@@ -60,6 +60,13 @@ export class NovedadesPage {
     return this.noticiasService.getShareLinks(noticia);
   }
 
+  renderDescripcion(descripcion: string | null | undefined): string {
+    const content = descripcion ?? '';
+    const textarea = this.document.createElement('textarea');
+    textarea.innerHTML = content;
+    return textarea.value.replace(/\u00a0/g, ' ');
+  }
+
   private updateCanonicalLink(slug: string, idNovedad: string): void {
     const canonicalUrl = this.buildCanonicalUrl(idNovedad, slug);
     const head = this.document.head;
@@ -98,7 +105,10 @@ export class NovedadesPage {
   }
 
   private buildDescription(noticia: Noticia): string {
-    const plainText = noticia.descripcion.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const plainText = this.renderDescripcion(noticia.descripcion)
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
 
     return plainText.length > 155 ? `${plainText.slice(0, 152)}...` : plainText;
   }

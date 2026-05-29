@@ -11,7 +11,12 @@
             <a routerLinkActive="active" [routerLink]="['/novedades', noticia.id_novedad, noticia.url]" class="noticia-titulo">{{ noticia.titulo }}</a>
             <p class="noticia-actualizado">Actualizado: {{ noticia.actualizado }}</p>
             <img class="noticia-image" [src]="noticia.imagen" [alt]="noticia.titulo" />
-            <div class="noticia-descripcion" [innerHTML]="noticia.descripcion"></div>
+            
+            <div class="noticia-descripcion" [innerHTML]="renderDescripcion(noticia.descripcion)"></div>
+
+            <!--<quill-view-html class="noticia-link" [content]="renderDescripcion(noticia.descripcion)" format="html" theme="snow"></quill-view-html>-->
+            
+            
             <p class="noticia-link">Leer nota completa: <a [href]="noticia.link" target="_blank">{{noticia.link}}</a></p>
             <div class="redes-container">
                 <a [href]="getShareLinks(noticia).facebook" target="_blank" rel="noopener noreferrer">

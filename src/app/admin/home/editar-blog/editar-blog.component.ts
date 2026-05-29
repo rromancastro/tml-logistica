@@ -100,6 +100,16 @@ export class EditarBlogComponent {
     });
   }
 
+  private decodeHtml(value: string): string {
+    if (!value) {
+      return '';
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = value;
+    return textarea.value;
+  }
+
   abrirImagenes(event: Event, campo: 'imagen' | 'imagenMini'): void {
     event.preventDefault();
     this.campoImagenActivo.set(campo);
@@ -158,7 +168,7 @@ export class EditarBlogComponent {
             titulo: data.titulo ?? '',
             fecha: data.fecha ?? '',
             actualizado: data.actualizado ?? '',
-            descripcion: data.descripcion ?? '',
+            descripcion: this.decodeHtml(data.descripcion ?? ''),
             imagen: data.imagen ?? '',
             imagenMini: data.imagenMini ?? '',
             link: data.link ?? '',

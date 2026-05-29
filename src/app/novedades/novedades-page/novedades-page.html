@@ -16,7 +16,7 @@
     <h1 class="noticia-titulo">{{ noticia.titulo }}</h1>
     <p class="noticia-actualizado">Actualizado: {{ noticia.actualizado }}</p>
     <img class="noticia-image" [src]="noticia.imagen" [alt]="noticia.titulo" />
-    <div class="noticia-descripcion" [innerHTML]="noticia.descripcion"></div>
+    <div class="noticia-descripcion" [innerHTML]="renderDescripcion(noticia.descripcion)"></div>
     <p class="noticia-link">
       Leer nota completa:
       <a [href]="noticia.link" target="_blank" rel="noopener noreferrer">{{ noticia.link }}</a>

@@ -24,6 +24,33 @@ function read_raw_query_value(string $key): string
     return is_string($value) ? trim($value) : '';
 }
 
+function normalize_rich_text(?string $value): string
+{
+    $content = (string) ($value ?? '');
+
+    if ($content === '') {
+        return '';
+    }
+
+    // Algunos registros viejos quedaron guardados con entidades HTML,
+    // a veces incluso doble-escapadas. Repetimos la decodificación unas
+    // pocas veces hasta estabilizar el contenido.
+    $previous = null;
+    $iterations = 0;
+
+    while ($content !== $previous && $iterations < 3) {
+        $previous = $content;
+        $content = html_entity_decode($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $iterations++;
+    }
+
+    // Quill guarda muchos espacios como NBSP; los normalizamos para que el texto
+    // pueda cortar líneas dentro del ancho real de la nota.
+    $content = str_replace("\xC2\xA0", ' ', $content);
+
+    return $content;
+}
+
 try {
     $pdo = adagians_pdo();
     $url = read_raw_query_value('url');
@@ -97,10 +124,11 @@ try {
 
     $item = [
         'id' => (string) ($item['id'] ?? ''),
+        'id_novedad' => (string) ($item['id'] ?? ''),
         'titulo' => (string) ($item['titulo'] ?? ''),
         'fecha' => (string) ($item['fecha'] ?? ''),
         'actualizado' => (string) ($item['actualizado'] ?? ''),
-        'descripcion' => (string) ($item['descripcion'] ?? ''),
+        'descripcion' => normalize_rich_text($item['descripcion'] ?? null),
         'imagen' => (string) ($item['imagen'] ?? ''),
         'imagenMini' => (string) ($item['imagenMini'] ?? ''),
         'link' => (string) ($item['link'] ?? ''),

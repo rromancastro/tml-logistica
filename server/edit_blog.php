@@ -39,16 +39,13 @@ $update_success = true;
 
 foreach ($array as $key => $value) {
     if (!is_array($value)) {
-        if ($key === 'texto') {
-            // El texto del blog se guarda como JSON de bloques sin escape extra.
-            $sql->editBlog($tabla, $key, $value, $where, $id);
-        } else {
-            // El resto de campos se sanitiza como texto normal.
-            $value = htmlspecialchars($value, ENT_QUOTES);
-            $sql->edit($tabla, $key, $value, $where, $id);
-        }
+        // Bloque anterior: se llamaba a un método inexistente (editBlog) y
+        // se dependía de getMal(), que no reflejaba el resultado real del update.
+        // Ahora usamos el método preparado existente y evaluamos su respuesta.
+        $result = $sql->edit_new($tabla, $key, (string) $value, $where, $id);
+        $decoded = json_decode($result, true);
 
-        if ($sql->getMal() > 0) {
+        if (!is_array($decoded) || ($decoded['error'] ?? '') !== '0') {
             $update_success = false;
             break;
         }

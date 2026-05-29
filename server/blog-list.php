@@ -17,6 +17,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/db.php';
 
+function normalize_rich_text(?string $value): string
+{
+    $content = (string) ($value ?? '');
+
+    if ($content === '') {
+        return '';
+    }
+
+    // Algunos registros viejos quedaron guardados con entidades HTML,
+    // a veces incluso doble-escapadas. Repetimos la decodificación unas
+    // pocas veces hasta estabilizar el contenido.
+    $previous = null;
+    $iterations = 0;
+
+    while ($content !== $previous && $iterations < 3) {
+        $previous = $content;
+        $content = html_entity_decode($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $iterations++;
+    }
+
+    // Quill guarda muchos espacios como NBSP; los normalizamos para que el texto
+    // pueda cortar líneas dentro del ancho real de la nota.
+    $content = str_replace("\xC2\xA0", ' ', $content);
+
+    return $content;
+}
 
 try {
     $pdo = adagians_pdo();
@@ -41,10 +67,11 @@ try {
         static function (array $row): array {
             return [
                 'id' => (string) ($row['id'] ?? ''),
+                'id_novedad' => (string) ($row['id'] ?? ''),
                 'titulo' => (string) ($row['titulo'] ?? ''),
                 'fecha' => (string) ($row['fecha'] ?? ''),
                 'actualizado' => (string) ($row['actualizado'] ?? ''),
-                'descripcion' => (string) ($row['descripcion'] ?? ''),
+                'descripcion' => normalize_rich_text($row['descripcion'] ?? null),
                 'imagen' => (string) ($row['imagen'] ?? ''),
                 'imagenMini' => (string) ($row['imagenMini'] ?? ''),
                 'link' => (string) ($row['link'] ?? ''),

@@ -76,33 +76,96 @@
   margin-bottom: 16px;
 }
 
-.noticia-descripcion ::ng-deep div {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.noticia-descripcion {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  white-space: normal !important;
+  margin-top: 0.5rem;
+}
+
+.noticia-descripcion ::ng-deep * {
+  max-width: 100%;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  white-space: normal !important;
+  hyphens: none !important;
+}
+
+.noticia-descripcion ::ng-deep p,
+.noticia-descripcion ::ng-deep span,
+.noticia-descripcion ::ng-deep li {
+  color: #6f7785 !important;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+  line-height: 1.7 !important;
+  overflow-wrap: normal !important;
+  word-break: keep-all !important;
+  white-space: normal !important;
+  hyphens: none !important;
+}
+
+.noticia-descripcion ::ng-deep p strong,
+.noticia-descripcion ::ng-deep h1,
+.noticia-descripcion ::ng-deep h2,
+.noticia-descripcion ::ng-deep h3,
+.noticia-descripcion ::ng-deep h4,
+.noticia-descripcion ::ng-deep h5,
+.noticia-descripcion ::ng-deep h6,
+.noticia-descripcion ::ng-deep strong {
+  color: #2f3947 !important;
+ 
+  font-weight: 700 !important;
+}
+
+.noticia-descripcion ::ng-deep h3 {
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+  margin: 0 0 1.4rem !important;
 }
 
 .noticia-descripcion ::ng-deep p {
-  color: #000;
-  font-weight: 300;
-  line-height: 1.4;
+  margin: 0 !important;
+}
+
+.noticia-descripcion ::ng-deep p:empty {
+  display: block;
+  min-height: 1.55em;
+  margin: 0 !important;
 }
 
 .noticia-descripcion ::ng-deep b {
-  color: #000;
-  font-weight: 400;
+  color: #2f3947 !important;
+  font-weight: 700 !important;
 }
 
 
 .noticia-link {
-  color: #000;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.4;
+  color: #6f7785 !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+  line-height: 1.7 !important;
+  margin-top: 0.65rem;
+  overflow-wrap: normal !important;
+  word-break: keep-all !important;
+  white-space: normal !important;
+  hyphens: none !important;
 
   a {
-    color: #00466e;
+    color: #1155cc;
     text-decoration: underline;
+    font-weight: 400;
+    
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    white-space: normal !important;
+    hyphens: none !important;
   }
 }
 .redes-container {
