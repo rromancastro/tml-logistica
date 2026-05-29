@@ -1,0 +1,100 @@
+﻿<section class="editor-page">
+  <form [formGroup]="EditFormGroup" (ngSubmit)="onSubmit(EditFormGroup)" ngNativeValidate class="editor-form mt-3">
+    <div class="editor-grid">
+      <div class="editor-card editor-card--full">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="titulo" />
+        </mat-form-field>
+      </div>
+
+      <div class="editor-card">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="fecha" placeholder="2026-05-29" />
+        </mat-form-field>
+      </div>
+
+      <div class="editor-card">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Actualizado</mat-label>
+          <input matInput formControlName="actualizado" placeholder="2026-05-29" />
+        </mat-form-field>
+      </div>
+
+      <div class="editor-card">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Link</mat-label>
+          <input matInput formControlName="link" />
+        </mat-form-field>
+      </div>
+
+      <div class="editor-card">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Url</mat-label>
+          <input matInput formControlName="url" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="image-grid">
+      <div class="image-section">
+        <h4 class="section-title">Imagen principal</h4>
+        <button type="button" class="image-picker" (click)="abrirImagenes($event, 'imagen')">
+          @if (EditFormGroup.get('imagen')?.value) {
+            <img [src]="EditFormGroup.get('imagen')?.value" class="image-preview image-preview--main" alt="Imagen principal de la noticia" />
+          } @else {
+            <div class="image-placeholder">
+              <mat-icon class="icon-display">add_photo_alternate</mat-icon>
+              <span>Seleccionar imagen</span>
+            </div>
+          }
+        </button>
+      </div>
+
+      <div class="image-section">
+        <h4 class="section-title">Imagen mini</h4>
+        <button type="button" class="image-picker image-picker--mini" (click)="abrirImagenes($event, 'imagenMini')">
+          @if (EditFormGroup.get('imagenMini')?.value) {
+            <img [src]="EditFormGroup.get('imagenMini')?.value" class="image-preview image-preview--mini" alt="Miniatura de la noticia" />
+          } @else {
+            <div class="image-placeholder">
+              <mat-icon class="icon-display">add_photo_alternate</mat-icon>
+              <span>Seleccionar miniatura</span>
+            </div>
+          }
+        </button>
+      </div>
+    </div>
+
+    <div class="editor-body">
+      <div class="editor-body__header">
+        <h4 class="section-title">Descripción</h4>
+        <p class="section-help">Escribí el contenido con más espacio visual y saltos de párrafo.</p>
+      </div>
+
+      <div class="quill-shell">
+        <quill-editor formControlName="descripcion" class="quill-editor"></quill-editor>
+      </div>
+    </div>
+
+    <div class="editor-actions">
+      <button matButton="filled" type="submit" class="btn-save">Guardar</button>
+    </div>
+  </form>
+</section>
+
+<div [class.modal]="subirOpcionesImagenes()" [class.modal-oculto]="!subirOpcionesImagenes()">
+  <div class="modal-contenido">
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button (click)="cerrarModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="mt-3">
+      @if (subirOpcionesImagenes()) {
+        <app-imagenes-seleccionar (emitoUrlDesdeImagenesSeleccionar)="recibirImagenes($event)"></app-imagenes-seleccionar>
+      }
+    </div>
+  </div>
+</div>

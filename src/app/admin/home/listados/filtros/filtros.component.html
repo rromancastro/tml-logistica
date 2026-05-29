@@ -1,0 +1,12 @@
+@if(mostrar){
+    <section>
+        <p>
+            <mat-button-toggle-group aria-label="Font Style">
+                @for(f of filtros; track f){
+                    <mat-button-toggle [value]="f.nombre" (click)="setNewFilter(f.nombre)">{{f.nombre}}</mat-button-toggle>
+                }
+                <mat-button-toggle [value]="'todos'" (click)="setNewFilter('todos')">Todos</mat-button-toggle>
+            </mat-button-toggle-group>
+        </p>
+    </section>
+}

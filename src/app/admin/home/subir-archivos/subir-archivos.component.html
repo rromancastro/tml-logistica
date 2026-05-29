@@ -1,0 +1,44 @@
+<section class="text-center p-3">
+  <h3>Subir Archivo</h3>
+
+  <!-- Input para seleccionar el archivo -->
+  <div class="custom-file-input mx-auto d-block mb-1 w-100">
+    <input type="file" id="fileInput" (change)="fileChangeEvent($event)" />
+    <label for="fileInput" class="file-label">
+      <span class="file-button">Seleccionar Archivo</span>
+    </label>
+  </div>
+
+  <!-- Vista previa para PDF o audio -->
+  @if (fileURL() && (selectedFile?.type === 'application/pdf' || selectedFile?.type?.startsWith('audio/') || selectedFile?.type?.startsWith('image/'))) {
+    <div class="file-preview">
+      @if(selectedFile?.type === 'application/pdf') {
+        <!-- Vista previa para PDF usando un iframe -->
+        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(fileURL())" width="200" height="300" class="pdf-preview"></iframe>
+      }
+      @else if(selectedFile?.type?.startsWith('audio/')) {
+        <!-- Vista previa para audio usando la etiqueta audio -->
+        <audio controls class="audio-preview">
+          <source [src]="fileURL()" [type]="selectedFile?.type">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+      }
+      @else if(selectedFile?.type?.startsWith('image/')) {
+        <!-- Vista previa para imágenes -->
+        <img [src]="fileURL()" alt="Vista previa" class="img-preview" width="200" />
+      }
+    </div>
+  }
+
+
+  <!-- Botón para subir el archivo -->
+  <button mat-flat-button class="mt-2" (click)="subirArchivo()">Subir Archivo</button>
+
+  <!-- Progreso de subida -->
+  @if (progresoSubida() > 0) {
+    <div class="p-2">
+      <p>Subiendo... {{ progresoSubida() }}%</p>
+      <mat-progress-bar mode="determinate" [value]="progresoSubida()"></mat-progress-bar>
+    </div>
+  }
+</section>

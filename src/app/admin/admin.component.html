@@ -1,0 +1,35 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="example-sidenav">
+    <h3> Adagians </h3>
+    <hr>
+    
+    <mat-accordion multi>
+      @for(f of folders; track f){
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{f.seccion}} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          @for(m of f.menues;track m){
+            <!-- El panel usa rutas absolutas para no depender de la ruta actual. -->
+            <!-- <mat-list-item class="pointer" routerLink="../{{m.url}}" routerLinkActive="active" ariaCurrentWhenActive="page"> -->
+            <mat-list-item class="pointer" [routerLink]="'/admin/' + m.url" routerLinkActive="active" ariaCurrentWhenActive="page">
+              <mat-icon matListItemIcon>article</mat-icon>
+              <div matListItemTitle class="text-capitalize">{{m.titulo}}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          }
+        </mat-list>
+      </mat-expansion-panel>
+    }
+    </mat-accordion>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <app-toolbar></app-toolbar>
+    <!-- El contenido principal ahora lo resuelven las rutas hijas del admin. -->
+    <!-- <app-listados></app-listados> -->
+    <router-outlet></router-outlet>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

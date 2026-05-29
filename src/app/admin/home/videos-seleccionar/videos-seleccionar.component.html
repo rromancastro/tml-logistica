@@ -1,0 +1,15 @@
+<div class="container">
+    <mat-tab-group [selectedIndex]="selected.value">
+        <mat-tab label="Subir Video" > 
+            <div class="p-5">
+                <app-videos-subir (seSubioLaImagen)="pasarAImagenes()"></app-videos-subir>
+            </div>
+        </mat-tab>
+        <!--<mat-tab label="Seleccionar Video">
+            <<app-seleccionarlas (emitoUrl)="recibirImagenes($event);"></app-seleccionarlas>
+        </mat-tab>-->
+        <mat-tab label="Videos de Pexels">
+            <app-pexels-video-gallery (emitoUrl)="recibirVideos($event);"></app-pexels-video-gallery>
+        </mat-tab>
+    </mat-tab-group>
+</div>

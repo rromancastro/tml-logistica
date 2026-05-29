@@ -1,0 +1,74 @@
+* {
+  transition-behavior: allow-discrete;
+}
+
+.columns {
+    column-count: 3; /* Número de columnas */
+    column-gap: 20px; /* Espacio entre columnas */
+}
+  
+.columns li {
+  list-style-type: none; /* Quitar el estilo de la lista si es necesario */
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  overflow-y: auto; /* Permitir scroll si el contenido es muy largo */
+}
+
+.modal-oculto {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  min-height: 75%;
+  max-height: 90vh; /* No debe sobrepasar el viewport */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  overflow-y: auto; /* Permite hacer scroll dentro del modal */
+}
+
+
+/* Botón de cerrar */
+.cerrar-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+
+.icon-display {
+    font-size: 24px;
+    height: 24px ;
+    width: 24px;
+}
+
+.insert-img{
+  padding: 1.5rem;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+}

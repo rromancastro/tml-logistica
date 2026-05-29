@@ -1,0 +1,16 @@
+
+<div class="container">
+    <mat-tab-group [selectedIndex]="selected.value">
+        <mat-tab label="Subir imagen" > 
+            <div class="p-5">
+                <app-img-crop-new [insertada]="true" (seSubioLaImagen)="pasarAImagenes()"></app-img-crop-new>
+            </div>
+        </mat-tab>
+        <mat-tab label="Seleccionar imagen">
+            <app-seleccionarlas (emitoUrl)="recibirImagenes($event);" [reiniciar]="actualizar()"></app-seleccionarlas>
+        </mat-tab>
+        <mat-tab label="Imágenes de Pexels">
+            <app-pexels-gallery (emitoUrl)="recibirImagenes($event);"></app-pexels-gallery>
+        </mat-tab>
+    </mat-tab-group>
+</div>

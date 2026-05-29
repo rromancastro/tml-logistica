@@ -1,0 +1,31 @@
+<h2 class="text-center p-1">Todas las imágenes ({{this.dataSource.data.length}})</h2>
+@if(paginator){
+  <div class="container">
+    @for (img of dataSource.data.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize); track img) {
+        <div class="item">
+          <img [ngSrc]="carpeta+img.src" width="200" height="100" class="img-fluid" [style.aspect-ratio]="img.aspect">
+          <div class="bottom-right">
+            <button  matTooltip="Recortar" mat-icon-button aria-label="Recortar una imagen" [routerLink]="'../img/'+img.id+'/img/crop'"> 
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+            <button  matTooltip="Ver" mat-icon-button aria-label="Ver las imagenes en mayor tamaño" [routerLink]="'../../img/zoom/'+img.id"> 
+              <mat-icon>zoom_in</mat-icon>
+            </button>
+            <button  matTooltip="copiar url" mat-icon-button aria-label="Copiar la dirección de una imagen" (click)="copiar(carpeta+img.src)"> 
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button  matTooltip="Eliminar imagen" mat-icon-button aria-label="Eliminar la imagen" (click)="borrar(img.id)"> 
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div> 
+        </div>
+      }
+  </div>
+}
+<mat-paginator 
+  [pageSizeOptions]="[5, 10, 25, 50, 100]" 
+  showFirstLastButtons 
+  aria-label="Select page of periodic elements">
+</mat-paginator>
+
+

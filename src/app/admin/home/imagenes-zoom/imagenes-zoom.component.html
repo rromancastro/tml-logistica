@@ -1,0 +1,41 @@
+
+<section class="h-50 centered position-relative">
+    <!-- Botón para imagen anterior -->
+    
+        <button mat-icon-button aria-label="ir a la anterior imagen" class="mx-1" (click)="navigateToImage(-1)">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        @if(!noexiste){
+        <div>
+            <img [ngSrc]="img()" width="200" height="100" class="img-fluid" [style.aspect-ratio]="aspect" priority>
+        </div>
+        }@else {
+            <p>No existe una imagen con este ID, vuelva para atrás...</p>
+        }
+        <button mat-icon-button aria-label="ir a la siguiente imagen" class="mx-1" (click)="navigateToImage(1)">
+            <mat-icon>chevron_right</mat-icon>
+            
+        </button>
+   
+  </section>
+<!-- Formulario para editar ALT y TITLE -->
+<div class="text-center mt-3">
+    
+    <form [formGroup]="imgForm" (ngSubmit)="guardarImagen()">
+      <p class="px-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Texto Alternativo (Importante para el SEO y accesibilidad) </mat-label>
+          <input matInput placeholder="Es imprescindible para el buen SEO" formControlName="alt">
+        </mat-form-field>
+      </p>
+      
+      <p class="px-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Título (Importante para el SEO y accesibilidad)</mat-label>
+          <input matInput placeholder="Aparece cuando haces hover en la imagen, suma para el seo" formControlName="title">
+        </mat-form-field>
+      </p>
+  
+      <button mat-flat-button type="submit" color="primary">Editar</button>
+    </form>
+</div>

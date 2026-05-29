@@ -1,0 +1,54 @@
+
+    
+    <div class="d-flex justify-content-center align-items-center">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Buscar imágenes</mat-label>
+                <input matInput type="text" [formControl]="busqueda">
+            </mat-form-field>
+        </p>
+        <p>
+            <button mat-icon-button aria-label="buscar una imagen en Pexels" class="search-btn" (click)="buscar()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </p>
+    </div>
+   
+    
+  
+    @if(photos.length > 0){
+        <div class="centered">
+            <button mat-icon-button aria-label="Buscar página anterior" (click)="paginaAnterior()">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            
+            <p>Total: {{total_results}} | Página: {{page}} | Mostrando : 50</p>
+            
+            <button mat-icon-button aria-label="Buscar página siguiente" (click)="paginaSiguiente()">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+        <div class="container">
+            @for(photo of photos; track photo){
+                <div class="item">
+                    <img [src]="photo.src.landscape" [alt]="photo.photographer" height="627" width="1200" class="img-fluid">
+                    <div class="bottom-right">
+                        <mat-checkbox 
+                            (change)="sumar(photo.src.landscape, $event.checked)"
+                            [checked]="imagenesCheckeadas.includes(photo.src.landscape)" 
+                        ></mat-checkbox>
+                    </div> 
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            <button mat-fab (click)="onSubmit()" matTooltip="Guardar" >
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+    }@else {
+        <p class="text-center">No hay imaágenes para mostrar...</p>
+    }
+  
+    
+  

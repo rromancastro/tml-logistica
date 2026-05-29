@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center align-items-center">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Buscar Videos</mat-label>
+            <input matInput type="text" [formControl]="busqueda">
+        </mat-form-field>
+    </p>
+    <p>
+        <button mat-icon-button aria-label="buscar una imagen en Pexels" class="search-btn" (click)="buscar()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </p>
+</div>
+
+
+
+@if(photos.length > 0){
+    <div class="centered">
+        <button mat-icon-button aria-label="Buscar página anterior" (click)="paginaAnterior()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        
+        <p>Total: {{total_results}} | Página: {{page}} | Mostrando : 50</p>
+        
+        <button mat-icon-button aria-label="Buscar página siguiente" (click)="paginaSiguiente()">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+    <div class="container">
+        @for(photo of photos; track photo.id){
+            @for(videos of photo.video_files; track videos.id){
+                @if(videos.width === 640){
+                    <div class="item">
+                        <video autoplay muted loop playsinline id="myVideo" oncanplay="this.play()" onloadedmetadata="this.muted = true" class="img-fluid">
+                            <source [src]="videos.link" type="video/mp4" >
+                            <track kind="captions" src="" srclang="en" label="No captions available">
+                        </video>
+                        <div class="bottom-right">
+                            <mat-checkbox 
+                                (change)="sumar(videos.link, $event.checked)"
+                                [checked]="imagenesCheckeadas.includes(videos.link)" 
+                            ></mat-checkbox>
+                        </div> 
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="text-center">
+        <button mat-fab (click)="onSubmit()" matTooltip="Guardar" >
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+}@else {
+    <p class="text-center">No hay videos para mostrar...</p>
+}

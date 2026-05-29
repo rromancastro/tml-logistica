@@ -1,0 +1,37 @@
+  
+<section class="mt-5 pt-5 container">
+    <div class="centered">
+        <img src="/assets/images/logo.png" alt="logo" class="logo-login">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" ngNativeValidate >
+        <p class="mt-1">
+            <mat-form-field appearance="fill" appearance="outline" class="w-100">
+                <mat-label>Usuario:</mat-label>
+                <input matInput placeholder="Ingrese su usuario" formControlName="user" required>
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            </p>
+            <p>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Contraseña:</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="pass" for/>
+            <button
+                mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()"
+            >
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+        </p>
+        <p>    
+            <button mat-stroked-button type="submit" class="w-100">Login</button>
+        </p>
+        @if(mensaje){
+            <div  class="verde text-center">{{mensaje}}</div>
+        }
+    </form>
+</section>
+         

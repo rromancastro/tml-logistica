@@ -1,0 +1,340 @@
+<div class="web-padding">
+  <div class="d-flex justify-content-evenly">
+      <div>
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="0" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div>
+        <h4 mat-dialog-title>Editar datos</h4>
+      </div>
+  </div>
+  
+  
+  @if(empezarFormulario()){ 
+    <form [formGroup]="EditFormGroup" (ngSubmit)="onSubmit(EditFormGroup)" ngNativeValidate class="mt-3">
+      @for(i of arrayEdits; track $index){
+        @if(i.t==='select'){
+         
+          <p>
+              <mat-form-field appearance="outline" class="w-100 pt-1">
+                <mat-label>{{i.n |  formatLabel}}</mat-label>
+                <mat-select [formControlName]="i.n">
+                    @for (p of dynamicProperties[i.n + '$'] | async; track p.id) {
+                        <mat-option [value]="p?.[i.v]">{{p?.[i.d]}}</mat-option>
+                    }
+                </mat-select>
+              </mat-form-field>
+          </p>
+        }
+        @if(i.t === 'autocomplete'){
+          <p>
+            <mat-form-field appearance="outline" class="w-100 pt-1">
+              <mat-label>{{ i.n | formatLabel }}</mat-label>
+              <input type="text"
+                     placeholder="Elegir caliopero"
+                     aria-label="Elegir caliopero"
+                     matInput
+                     [value]="getNombrePorId(i.n, EditFormGroup.get(i.n)?.value)"
+                     [formControlName]="i.n"
+                     [matAutocomplete]="auto">
+                     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      @for (option of (filteredOptions[i.n] | async) ?? []; track option.id) {
+                          <mat-option [value]="option.id">
+                              {{ option.nombre }} {{ option.apellido }}
+                          </mat-option>
+                      }
+                  </mat-autocomplete>
+            </mat-form-field>
+          </p>
+        }
+
+        @if(i.t==='selectBoolean'){
+          <mat-form-field appearance="outline" class="w-100 pt-1">
+            <mat-label>{{i.n |  formatLabel}}</mat-label>
+            <mat-select [formControlName]="i.n" >
+              <mat-option value="si">Si</mat-option>
+              <mat-option value="no">No</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
+
+        @if(i.t === 'selectM'){
+          <mat-form-field appearance="outline" class="w-100 pt-1">
+            <mat-label>{{ i.n | formatLabel }}</mat-label>
+            <mat-select [formControlName]="i.n" multiple>
+              @for (p of dynamicProperties[i.n + '$'] | async; track p.id) {
+                <mat-option [value]="'['+p?.[i.v]+']'">{{p?.[i.d]}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+
+        @if(i.t==='text'){
+          <p>
+              <mat-form-field class="w-100 mt-2" appearance="outline"> 
+              <mat-label class="texto">{{i.n |  formatLabel}}</mat-label>  
+              <input matInput [type]="i.t"  [name]="i.n" [id]="i.n" [formControlName]="i.n" placeholder=""> 
+              @if(EditFormGroup.get(i.n)?.invalid && (EditFormGroup.get(i.n)?.dirty || EditFormGroup.get(i.n)?.touched)){
+                  @if(EditFormGroup.get(i.n)?.errors?.['required']){
+                  <mat-hint>
+                      Falta este dato: {{i.n}}
+                  </mat-hint>
+                  }  
+                  @if(EditFormGroup.get(i.n)?.errors?.['minlength']){
+                  <mat-hint>
+                      Falta texto en {{i.n}}
+                  </mat-hint>
+                  }
+              }
+              </mat-form-field>
+          </p>
+        }
+
+        @if(i.t==='email'){
+          <p>
+              <mat-form-field class="w-100 mt-2" appearance="outline"> 
+              <mat-label class="texto">{{i.n |  formatLabel}}</mat-label>  
+              <input matInput [type]="i.t"  [name]="i.n" [id]="i.n" [formControlName]="i.n" placeholder=""> 
+              @if(EditFormGroup.get(i.n)?.invalid && (EditFormGroup.get(i.n)?.dirty || EditFormGroup.get(i.n)?.touched)){
+                  @if(EditFormGroup.get(i.n)?.errors?.['required']){
+                  <mat-hint>
+                      Falta este dato: {{i.n}}
+                  </mat-hint>
+                  }  
+                  @if(EditFormGroup.get(i.n)?.errors?.['minlength']){
+                  <mat-hint>
+                      Falta texto en {{i.n}}
+                  </mat-hint>
+                  }
+              }
+              </mat-form-field>
+          </p>
+        }
+
+        @if(i.t==='password'){
+          <p>
+              <mat-form-field class="w-100 mt-2" appearance="outline"> 
+              <mat-label class="texto">{{i.n |  formatLabel}}</mat-label>  
+              <input matInput [type]="i.t"  [name]="i.n" [id]="i.n" [formControlName]="i.n" placeholder=""> 
+              @if(EditFormGroup.get(i.n)?.invalid && (EditFormGroup.get(i.n)?.dirty || EditFormGroup.get(i.n)?.touched)){
+                  @if(EditFormGroup.get(i.n)?.errors?.['required']){
+                  <mat-hint>
+                      Falta este dato: {{i.n}}
+                  </mat-hint>
+                  }  
+                  @if(EditFormGroup.get(i.n)?.errors?.['minlength']){
+                  <mat-hint>
+                      Falta texto en {{i.n}}
+                  </mat-hint>
+                  }
+              }
+              </mat-form-field>
+          </p>
+        }
+
+        @if(i.t==='date'){
+          <mat-form-field class="w-100 mt-2" appearance="outline">
+            <mat-label class="texto">{{i.n |  formatLabel}}</mat-label>  
+            <input matInput [matDatepicker]="picker" [name]="i.n" [id]="i.n" [formControlName]="i.n" >
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        }
+
+        @if(i.t==='number'){
+          <mat-form-field class="w-100 mt-2" appearance="outline"> 
+          <mat-label class="texto">{{i.n |  formatLabel}}</mat-label>  
+          <input matInput [type]="i.t"  [name]="i.n" [id]="i.n" [formControlName]="i.n" placeholder=""> 
+            @if(EditFormGroup.get(i.n)?.invalid && (EditFormGroup.get(i.n)?.dirty || EditFormGroup.get(i.n)?.touched)){
+              @if(EditFormGroup.get(i.n)?.errors?.['required']){
+                <mat-hint>
+                  Falta este dato: {{i.n}}
+                </mat-hint>
+              }  
+              @if(EditFormGroup.get(i.n)?.errors?.['minlength']){
+                <mat-hint>
+                  Falta texto en {{i.n}}
+                </mat-hint>
+              }
+            }
+          </mat-form-field>
+        }
+
+        @if(i.t==='area'){
+          <mat-form-field class="w-100 mt-2" appearance="outline"> 
+            <mat-label class="texto">{{i.n |  formatLabel }}</mat-label>  
+            <textarea matInput [type]="i.t"  [name]="i.n" [id]="i.n" [formControlName]="i.n" placeholder=""></textarea> 
+          </mat-form-field>
+        }
+        @if(i.t === 'editor'){
+          <div>
+            <quill-editor [formControlName]="i.n"></quill-editor>
+          </div>
+        }
+        <!--{{EditFormGroup.get('img')}}-->
+        @if(i.t === 'img'){
+          <!--{{EditFormGroup.get('img')}}-->
+          <div class="d-flex align-items-center">
+            <div (click)="abrirImagenes($event)" type="button" class="insert-img">
+              <mat-icon class="icon-display">add_photo_alternate</mat-icon>
+            </div>
+            
+            @if(EditFormGroup.get('img')?.value!==0){
+              @for(img of carouselServ.separarPorComas(EditFormGroup.get('img')?.value); track $index){
+                <div class="px-2">  
+                  <img [src]="img" width="200">
+                </div>
+                <div class="px-1">  
+                  <button matMiniFab (click)="borrarImagen($event)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              }
+            }
+          </div>
+        }
+
+        @if(i.t === 'video'){
+          <div class="d-flex">
+            <div (click)="abrirVideos($event)" type="button" class="insert-img">
+              <mat-icon class="icon-display">video_library</mat-icon>
+            </div>
+            <!--{{carouselServ.separarPorComas(EditFormGroup.get('img')?.value)}}-->
+            @if(EditFormGroup.get('video')?.value!==0){
+              @for(img of carouselServ.separarPorComas(EditFormGroup.get('video')?.value); track img){
+                <div class="px-2">  
+                  <video autoplay muted loop playsinline id="myVideo" oncanplay="this.play()" onloadedmetadata="this.muted = true" class="img-fluid" width="250" height="130">
+                    <source [src]="img" type="video/mp4" >
+                    <track kind="captions" src="" srclang="en" label="No captions available">
+                  </video>
+                </div>
+              }
+            }
+          </div>
+        }
+
+        @if(i.t === 'folder'){
+          <p>{{i.n}}</p>
+          <div class="d-flex">
+            <div (click)="abrirArchivos($event,i.n)" type="button" class="insert-img">
+              <mat-icon class="icon-display">upload_file</mat-icon>
+            </div>
+            
+            @if(EditFormGroup.get(i.n)?.value!==0){
+              @for(img of carouselServ.separarPorComas(EditFormGroup.get(i.n)?.value); track img){
+                <div class="px-2">  
+                  <p class="text-center">{{carouselServ.obtenerNombreArchivo(img)}}</p>
+                  @if (carouselServ.extension(img) === 'pdf') {
+                    <ng-container>
+                      <mat-icon class="icon-display">picture_as_pdf</mat-icon>
+                      <!--<embed [src]="sanitizer.bypassSecurityTrustResourceUrl(img)" type="application/pdf" width="200px" height="150px" />-->
+                    </ng-container>
+                    
+                  }
+                    <!-- Si la extensión es MP3 o WAV -->
+                  @if (carouselServ.extension(img) === 'mp3' ||carouselServ.extension(img) === 'wav') {
+                    <ng-container>
+                      <audio [src]="img" controls>
+                        Tu navegador no soporta el elemento de audio.
+                      </audio>
+                    </ng-container>
+                  }
+                  
+                </div>
+              }
+            }
+          </div>
+          <br/>
+        }
+
+        @if(i.t === 'check'){
+            <h4>{{i.n | formatLabel }}</h4>
+            <ul [formArrayName]="'check'" class="columns">
+              @for (p of dynamicProperties[i.n + '$'] | async; track p.id; let a = $index) {
+                <li>
+                  <mat-checkbox [formControlName]="a">
+                    {{p.nombre}}
+                  </mat-checkbox>
+                </li>
+              }
+            </ul>
+        }
+       <!-- @if(i.t==='acordeon'){
+          <h4 class="mt-2 pt-2"><b>Zona de atención:</b><i>{{this.data.datosFormulario[0][i.b]}}</i></h4>
+              <mat-accordion>
+              @for (p of acordeon2$['base'] | async; track p.id) {
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> {{p.nombre}} </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ul class="columns" [formArrayName]="'check'">
+                    @for (localidades of dynamicProperties['nombre'] | async; track localidades.id; let a = $index) {
+                      @if(localidades.id_zona_de_atencion === p.id ){    
+                        <li>
+                            <mat-checkbox [formControlName]="a">
+                                {{localidades.nombre}} {{localidades.descripcion}}
+                            </mat-checkbox>
+                        </li>
+                      }
+                    }
+                  </ul>
+                </mat-expansion-panel>
+                }
+              </mat-accordion>
+            }-->
+
+          }
+          <button mat-flat-button color="primary" type="submit" class="mt-2">{{textoBoton}}</button>
+    </form>
+  }
+
+  
+  <div [ngClass]="subirOpcionesImagenes ? 'modal' : 'modal-oculto'">
+    <div class="modal-contenido">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button (click)="cerrarModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="mt-3">
+        @if(subirOpcionesImagenes){
+        <app-imagenes-seleccionar (emitoUrlDesdeImagenesSeleccionar)="recibirImagenes($event)"></app-imagenes-seleccionar>
+        }
+      </div>
+    </div>
+  </div>
+  
+
+  <div [ngClass]="subirOpcionesVideos ? 'modal' : 'modal-oculto'">
+    <div class="modal-contenido">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button (click)="cerrarModalVideo()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="mt-3">
+        @if(subirOpcionesVideos){
+          <app-videos-seleccionar (emitoUrlDesdeVideosSeleccionar)="recibirVideos($event)"></app-videos-seleccionar>
+          }
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="subirOpcionesArchivos ? 'modal' : 'modal-oculto'">
+    <div class="modal-contenido">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button (click)="cerrarModalArchivos()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="mt-3">
+        @if(subirOpcionesArchivos){
+          <app-archivos-seleccionar (emitoUrlDesdeArchivosSeleccionar)="recibirArchivos($event)"></app-archivos-seleccionar>
+        }
+      </div>
+    </div>
+  </div>
+
+</div>

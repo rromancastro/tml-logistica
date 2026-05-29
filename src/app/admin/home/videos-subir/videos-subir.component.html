@@ -1,0 +1,40 @@
+<section class="text-center px-2">
+    <h3>Subir un archivo de video</h3>
+  
+    <!-- Input para seleccionar el archivo -->
+    <div class="custom-file-input mx-auto d-block mb-1 w-100">
+      <input type="file" id="fileInput" (change)="fileChangeEvent($event)"/>
+      <label for="fileInput" class="file-label">
+        <span class="file-button">Seleccionar Archivo</span>
+      </label>
+    </div>
+    
+    
+    <!-- Vista previa si es imagen -->
+    @if (fileURL() && selectedFile?.type?.startsWith('image/')) {
+      <div class="image-preview">
+        <img [src]="fileURL()" width="200" height="100" class="img-fluid">
+      </div>
+    }
+  
+    <!-- Vista previa si es video -->
+    @if (fileURL() && selectedFile?.type?.startsWith('video/')) {
+      <div class="video-preview mt-2">
+        <video controls width="400">
+          <source [src]="fileURL()" type="video/mp4">
+          Tu navegador no soporta la reproducción de videos.
+        </video>
+      </div>
+    }
+  
+    <!-- Botón para subir el archivo -->
+    <button mat-flat-button color="primary" (click)="subirArchivo()">Subir Archivo</button>
+  
+    <!-- Progreso de subida -->
+    @if (progresoSubida() > 0) {
+        <div class="p-2">
+            <p>Subiendo... {{ progresoSubida() }}%</p>
+            <mat-progress-bar mode="determinate" [value]="progresoSubida()"></mat-progress-bar>
+        </div>
+    }
+  </section>

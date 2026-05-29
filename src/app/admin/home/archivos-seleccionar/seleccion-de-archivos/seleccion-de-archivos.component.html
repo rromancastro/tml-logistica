@@ -1,0 +1,65 @@
+@if(paginator){
+  
+    <div class="container">
+      @for (img of dataSource.data.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize); track img.id) {
+          <div class="item">
+            <p style="color:black">{{img.nombre}}</p>
+          @if (carouselServ.extension(img.nombre) === 'pdf') {
+            <ng-container>
+              <mat-icon class="icon-display">picture_as_pdf</mat-icon>
+            </ng-container>
+          }
+          @if ((carouselServ.extension(img.nombre) === 'png') || (carouselServ.extension(img.nombre) === 'jpg') || (carouselServ.extension(img.nombre) === 'peg')) {
+            <ng-container>
+              <img src="{{img.src}}" width="200" height="150" style="width: 200px; height: auto;">
+            </ng-container>
+          }
+            <!-- Si la extensión es MP3 o WAV -->
+          @if (carouselServ.extension(img.nombre) === 'mp3' ||carouselServ.extension(img.nombre) === 'wav') {
+            <ng-container>
+              <audio [src]="img" controls>
+                Tu navegador no soporta el elemento de audio.
+              </audio>
+            </ng-container>
+          }
+            <div class="bottom-right">
+              <div class="d-flex">
+                <mat-checkbox 
+                  (change)="sumar(carpeta + img.src, $event.checked)"
+                  [checked]="imagenesCheckeadas.includes(carpeta + img.src)" 
+                ></mat-checkbox>
+                <button class="px-1" (click)="borrar(img.nombre,img.id)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div> 
+          </div>
+        }
+    </div>
+    
+  }
+  <div class="fixed-bottom-buttons">
+    <div class="d-flex justify-content-between my-4 px-1">
+      <div class="text-center">
+        <button mat-fab (click)="actualizar()"  type="button">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      
+      <div class="text-center">
+        <button mat-fab (click)="onSubmit()"  type="button">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-paginator 
+    [pageSizeOptions]="[5, 10, 25, 50, 100]" 
+    showFirstLastButtons 
+    aria-label="Select page of periodic elements" class="margin-top">
+  </mat-paginator>
+  
+  
+  
+  

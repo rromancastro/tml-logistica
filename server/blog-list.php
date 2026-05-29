@@ -23,7 +23,7 @@ try {
 
     $stmt = $pdo->prepare(
         'SELECT
-            id_novedad,
+            id,
             titulo,
             fecha,
             actualizado,
@@ -33,14 +33,14 @@ try {
             link,
             url
         FROM noticias
-        ORDER BY id_novedad ASC'
+        ORDER BY id ASC'
     );
     $stmt->execute();
 
     $noticias = array_map(
         static function (array $row): array {
             return [
-                'id_novedad' => (string) ($row['id_novedad'] ?? ''),
+                'id' => (string) ($row['id'] ?? ''),
                 'titulo' => (string) ($row['titulo'] ?? ''),
                 'fecha' => (string) ($row['fecha'] ?? ''),
                 'actualizado' => (string) ($row['actualizado'] ?? ''),

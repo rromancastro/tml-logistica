@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/db.php';
 
-// Endpoint de detalle: devuelve una sola noticia por `url`, `id_novedad` o `id`.
+// Endpoint de detalle: devuelve una sola noticia por `url`, `id` o `id`.
 function read_raw_query_value(string $key): string
 {
     $value = filter_input(INPUT_GET, $key, FILTER_UNSAFE_RAW);
@@ -27,12 +27,12 @@ function read_raw_query_value(string $key): string
 try {
     $pdo = adagians_pdo();
     $url = read_raw_query_value('url');
-    $idNovedad = read_raw_query_value('id_novedad');
+    $idNovedad = read_raw_query_value('id');
     $id = read_raw_query_value('id');
 
     if ($url === '' && $idNovedad === '' && $id === '') {
         http_response_code(400);
-        echo json_encode(['error' => 'Se requiere url, id_novedad o id.'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['error' => 'Se requiere url, id.'], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
@@ -66,11 +66,11 @@ try {
 
     $where = $url !== ''
         ? 'url = :value'
-        : 'id_novedad = :value';
+        : 'id = :value';
 
     $sql = "
         SELECT
-            id_novedad,
+            id,
             titulo,
             fecha,
             actualizado,
@@ -96,7 +96,7 @@ try {
     }
 
     $item = [
-        'id_novedad' => (string) ($item['id_novedad'] ?? ''),
+        'id' => (string) ($item['id'] ?? ''),
         'titulo' => (string) ($item['titulo'] ?? ''),
         'fecha' => (string) ($item['fecha'] ?? ''),
         'actualizado' => (string) ($item['actualizado'] ?? ''),

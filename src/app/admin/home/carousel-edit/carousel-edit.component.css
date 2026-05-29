@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px; /* Espaciado entre los divs */
+    padding: 10px;
+}
+
+.item {
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+}
+.item img{
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+.bottom-right {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    bottom: 18%;
+    right: 12%;
+    color: white;
+    border-radius: 8px;
+}

@@ -1,0 +1,13 @@
+<div class="container">
+    <mat-tab-group [selectedIndex]="selected.value">
+        <mat-tab label="Subir Archivos" > 
+            <div class="p-5">
+                <app-subir-archivos (seSubioLaImagen)="pasarAArchivos()"></app-subir-archivos>
+            </div>
+        </mat-tab>
+        <mat-tab label="Seleccionar Archivos">
+            <app-seleccion-de-archivos [actualizarData]="actualizar()" (emitoUrl)="recibirArchivos($event);"></app-seleccion-de-archivos>
+        </mat-tab>
+        
+    </mat-tab-group>
+</div>

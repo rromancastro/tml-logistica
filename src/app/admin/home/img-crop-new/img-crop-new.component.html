@@ -1,0 +1,70 @@
+<div class="px-2 mt-2">
+    <div>
+        @if(!mostrarUpload()) {
+            <h3>Editar imágen</h3>
+        }@else{
+            <h3>Subí una imágen</h3>
+            @if (progresoCarga() > 0) {
+                <div class="py-2 ">
+                    <p> Cargando imagen... {{ progresoCarga() }}%</p>
+                    <mat-progress-bar mode="determinate" [value]="progresoCarga()"></mat-progress-bar>
+                </div>
+            }
+            @if(!mostrarUpload()){
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Seleccionar un ratio</mat-label>
+                    <mat-select>
+                    @for (food of aspectRatio; track food) {
+                        <mat-option (click)="setRatio(food.aspect)" [value]="food.aspect">{{food.value}}</mat-option>
+                    }
+                    </mat-select>
+                </mat-form-field>
+            }
+        }
+    </div>
+        
+    <div class="mt-2">
+        @if(mostrarUpload()) {
+            <div class="custom-file-input mx-auto d-block mb-1 w-100">
+                <input type="file" id="fileInput" (change)="fileChangeEvent($event)"/>
+                <label for="fileInput" class="file-label">
+                    <span class="file-button">Subir una imagen</span>
+                </label>
+            </div>
+        }
+    </div>      
+    <section class="d-flex justify-content-center">
+        <div>
+            <image-cropper
+                [imageURL]="ImgCargada[0]?.src"
+                [imageQuality]="calidad"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="radioAspect"
+                format="webp"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded($event)"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+        </div>
+    </section>
+    <div class="d-flex justify-content-center">
+        
+        @if(mostrarEditar()){
+        <div class="mt-2">
+            <button mat-mini-fab color="accent" matTooltip="Volver" aria-label="Volver" class="ms-1" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+            <button mat-mini-fab color="" matTooltip="Reemplazar imagen" aria-label="Reemplazar imagen" (click)="reemplazarFoto()" class="ms-1"><mat-icon>upload</mat-icon></button>
+            <button mat-mini-fab color="primary" class="ms-1" matTooltip="Eliminar" aria-label="Eliminar" (click)="eliminarFoto()"><mat-icon>delete</mat-icon></button>
+            <button mat-mini-fab color="primary" class="ms-1" matTooltip="Guardar" aria-label="Guardar" (click)="guardarImg()"><mat-icon>save</mat-icon></button>
+        </div>
+        }@else if(mostrarGuardar()){
+        <div class="mt-2">
+            <button mat-mini-fab color="accent" class="ms-1" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+            <button mat-mini-fab color="primary" class="ms-1" (click)="guardarImg()"><mat-icon>save</mat-icon></button>
+        </div>
+        }
+        
+    <div>    
+    
+</div>
