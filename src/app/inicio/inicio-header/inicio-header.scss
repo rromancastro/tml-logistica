@@ -2,6 +2,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
+    max-height: 600px;
     overflow: hidden;
 
     video {
@@ -72,6 +73,7 @@
 
 @media (max-width: 1024px) {
     .hero {
+        max-height: none;
         video {
             height: 100vh;
             max-height: none;
