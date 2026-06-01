@@ -74,6 +74,7 @@
     .hero {
         video {
             height: 100vh;
+            max-height: none;
         }
 
         > div {
